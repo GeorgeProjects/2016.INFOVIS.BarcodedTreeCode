@@ -55,14 +55,26 @@ define([
 		packed_csvdata_to_lineartree: function(csv_data_array,curtree_index)
 		{
 			var self = this;
-			self.process_csv(csv_data_array);
-			var filteredDataArray = self.filter(csv_data_array);//filteredDataArray是可以直接使用的datalist形式了
-			var root = self.build_tree(filteredDataArray,curtree_index);
-			self.aggregate_separate_tree_value(root);
-			self.reorder_tree(root);
-			self.cal_all_pattern_marking(root,true);
-			self.cal_routes(root);
-			var resultArray = self.linearlize(root);
+			self.process_csv(csv_data_array);//将csv读出的数组转化成datalist格式
+			var filteredDataArray = self.filter(csv_data_array);
+
+			//建树，计算._depth, ._father, .children[], .description, .name, 为叶子节点给出.trees_values[]
+			var root = self.build_tree(filteredDataArray,curtree_index);//tested
+			
+			//为非叶子节点计算.trees_values[]
+			self.aggregate_separate_tree_value(root);//tested
+			
+			//对每个.children[]中的结点组，按照节点名字的字典序从小到大排
+			self.reorder_tree(root);//tested
+			
+			//计算.continuous_repeat_time, .nth_different_tree, .maximum_continuous_repeat_group_size, 增加虚拟结点并进行修正
+			self.cal_all_pattern_marking(root,true);//tested
+			
+			//计算.route
+			self.cal_routes(root);//tested
+			
+			//对得到的树按深度优先线性化，计算.linear_index
+			var resultArray = self.linearlize(root);//tested
 			return resultArray;
 		},
 		//这个函数是与csv定义的数据结构直接相关的
@@ -83,7 +95,7 @@ define([
 				}
 				
 				//注意cid的可能是两位数，可能是三位数，所以不能直接截两位
-				var curCID = +curElement['VPI/VCI'].substr(19,curElement['VPI/VCI'].length-19);
+				var curCID = curElement['VPI/VCI'].substr(19,curElement['VPI/VCI'].length-19);
 				if (curCID != '')//如果没有cid，不要硬加上
 				{
 					curElement.cid = curCID;
@@ -562,7 +574,9 @@ define([
 		cal_routes: function (root)
 		{
 			var self = this;
-			root.route = (typeof(root._father) != 'undefined') ? root._father.route + root.name : root.name;
+			root.route = (typeof(root._father) != 'undefined') ? _.clone(root._father.route) : [];//赋值father的route时要深拷贝
+			root.route.push(root.name);
+
 			//对每个子递归计算
 			if ( ! _.has(root,'children'))
 				return;
