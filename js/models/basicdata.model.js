@@ -59,22 +59,22 @@ define([
 			var filteredDataArray = self.filter(csv_data_array);
 
 			//建树，计算._depth, ._father, .children[], .description, .name, 为叶子节点给出.trees_values[]
-			var root = self.build_tree(filteredDataArray,curtree_index);//tested
+			var root = self.build_tree(filteredDataArray,curtree_index);
 			
 			//为非叶子节点计算.trees_values[]
-			self.aggregate_separate_tree_value(root);//tested
+			self.aggregate_separate_tree_value(root);
 			
 			//对每个.children[]中的结点组，按照节点名字的字典序从小到大排
-			self.reorder_tree(root);//tested
+			self.reorder_tree(root);
 			
 			//计算.continuous_repeat_time, .nth_different_tree, .maximum_continuous_repeat_group_size, 增加虚拟结点并进行修正
-			self.cal_all_pattern_marking(root,true);//tested
+			self.cal_all_pattern_marking(root,true);
 			
-			//计算.route
-			self.cal_routes(root);//tested
+			//计算.route[]
+			self.cal_routes(root);
 			
 			//对得到的树按深度优先线性化，计算.linear_index
-			var resultArray = self.linearlize(root);//tested
+			var resultArray = self.linearlize(root);
 			return resultArray;
 		},
 		//这个函数是与csv定义的数据结构直接相关的
