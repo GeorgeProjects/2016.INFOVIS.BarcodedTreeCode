@@ -11,7 +11,7 @@ define([
 	'use strict';
 
 	return Backbone.Model.extend({
-		defaults: function(){
+		defaults: {
 			histogramAttr:[]
 		},
 		initialize: function(){
@@ -19,10 +19,11 @@ define([
 			self.basicDataModel = new BasicDataModel();
 		},
 		handle_histogram_attr: function(file_lineardata_array){
-			console.log('handle');
 			var self = this;
 			self.basicDataModel.set('fileLinearDataArray',file_lineardata_array);
-			console.log(file_lineardata_array);
+			//iterate the array to get the histogram information we needed when draw the histogram 
+			//store into the histogramAttr
+			
 		}	
 	});
 })

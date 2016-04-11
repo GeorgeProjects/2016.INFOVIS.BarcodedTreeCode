@@ -11,11 +11,9 @@ define([
 	'use strict';
 
 	return Backbone.Model.extend({
-		default: function(){
-			return{
-				'fileCSVDataArray': [],
-				'fileLinearDataArray': []
-			}
+		default: {
+			'fileCSVDataArray': [],
+			'fileLinearDataArray': []
 		},
 		load_csv_data: function(def_array){
 			var self = this;
