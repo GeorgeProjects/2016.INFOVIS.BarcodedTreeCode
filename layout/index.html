@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE-edge">
+	<meta charset="UTF-8">
+	<title>test</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="js/libs/jquery-ui-1.11.2.custom/jquery-ui.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="css/project/project.css" media="screen">
+	<script type="text/javascript" src="js/libs/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/libs/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/libs/bootstrap.js"></script>
+	<script type="text/javascript" src="js/libs/d3.v3.js"></script>
+	<script type="text/javascript" src="js/libs/contextmenu.js"></script>
+</head>
+<body>
+	<div class="container">
+		<!-- Menu -->
+		<div class="contextMenu" id="addHotspotMenu">
+			<ul>
+				<li id="addHotspot"><span class="glyphicon glyphicon-signal"></span> Create Hot Spot</li>
+			</ul>
+		</div>
+		<div class="contextMenu" id="editHotspotMenu">
+			<ul>
+				<li id="configHotspot"><span class="glyphicon glyphicon-cog"></span> Edit</li>
+				<li id="deleteHotspot"><span class="glyphicon glyphicon-remove"></span> Delete</li>
+			</ul>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade bs-example-modal-sm" id="loadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title" id="myModalLabel">Open a local file</h4>
+					</div>
+					<div class="modal-body">
+						<input type="file" id="File"/>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="ConfirmData">OK</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="Cancel">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade bs-example-modal-sm" id="HotspotSetting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title" id="myModalLabel1">Wifi Settings</h4>
+					</div>
+					<div class="modal-body" style="margin:10px 0px 20px 0px">
+						<div style="margin: 0px 10px 10px 10px">ID: <input type="text" id="id_input"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="ConfirmSetting">OK</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="Cancel">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade bs-example-modal-sm" id="HotspotSize" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title" id="myModalLabel1">Hotspot Size</h4>
+					</div>
+					<div class="modal-body" style="margin:10px 0px 20px 0px">
+						<div>
+							<text id="size_value" style="position:relative;bottom:3px"></text>
+							<div id="sizeSlider" style="margin:0px 10px 3px 10px"></div>
+							<text id="size_min" style="float:left;position:relative"></text>
+							<text id="size_max" style="float:right;position:relative"></text>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="ConfirmSize">OK</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="btn-toolbar" role="toolbar">
+					<button class="btn btn-default" type="button" id="SetSize">
+						<span class="glyphicon glyphicon-signal"></span> Hotspot
+					</button>
+					<button class="btn btn-default" type="button" id="editable">
+						<span class="glyphicon glyphicon-eye-open"></span> View
+					</button>
+					<button class="btn btn-default" type="button" id="LoadLayout">
+						<span class="glyphicon glyphicon-folder-open"></span> Load
+					</button>
+					<button class="btn btn-default" type="button" id="SaveLayout">
+						<span class="glyphicon glyphicon-floppy-disk"></span> Save
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="padding: 5px">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 svg-container">
+				<svg id="layout"></svg>
+			</div>
+		</div>
+		<script type="text/javascript">
+		var o_width=$(".row:first").css("width"), o_height=parseInt(innerHeight)-parseInt($(".row:first").css("height"))-40;
+		var o_svg = d3.select("#layout")
+		.attr("width",o_width)
+		.attr("height",o_height)
+		.append("g")
+		.attr("id","layoutContainer")
+		.append("g");
+		var o_background =
+		o_svg
+		.append("image")
+		.attr("x",0)
+		.attr("y",0)
+		.attr("width",o_width)
+		.attr("height",o_height)
+		.attr("xlink:href","./sources/background.png");
+		</script>
+		<script type="text/javascript" src="js/project/hotspots.js"></script>
+	</body>
+	</html>

@@ -1,0 +1,12 @@
+#layout{
+	border: #000 solid 1px;
+}
+
+.row{
+	margin: 10px 0 10px 0;
+}
+
+.hotspotNode{
+	fill: #e34a33;
+	cursor: move;
+}
