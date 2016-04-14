@@ -29,20 +29,12 @@ define([
 			if (fileNameArray.length != file_lineardata_array.length)
 				console.log("handle_histogram_attr error, incoherent array length");
 
-			//II. 不同显示模式下需要的对象数组
-			//显示结点数 or 显示流量 ； 按时间排序 or 按流量排序
-			//histogramDataArray[value_dim][sortmode_dim][]
-			//value_dim取"flowSize"或"nodenum"
-			//sortmode_dim取"time"或"value
-			//histogramDataArray[][][]是对fileInfoData[]的重排序以及不必要属性的筛除
-
 			//histogram和右上角的框中的数据只依赖fileInfoData[]
 			//I. fileInfoData[]对象数组, 包含
 			//1. 每个数据文件的文件名 .file_name
 			//2. 总结点数 .nonvirtual_sum_node
 			//3. 各层的结点数的数组 .nonvirtual_node_of_level[]
 			//4. 总流量 .sum_flowSize
-
 			self.fileInfoData = [];
 			for (var i = 0;i < file_lineardata_array.length;++i)
 			{
