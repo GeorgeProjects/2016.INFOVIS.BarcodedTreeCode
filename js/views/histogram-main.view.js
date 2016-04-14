@@ -16,12 +16,14 @@ define([
 		template: false,
 		attributes:{
 			'style': 'width: 100%, height: 100%'
+			
 		},
 		event:{
 
 		},
 		initialize: function(options){
 			var self = this;
+			
 		}
 	}, SVGBase));
 });
