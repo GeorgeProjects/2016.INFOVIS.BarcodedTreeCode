@@ -30,14 +30,16 @@ body{
     	position: absolute;
     	height: @histogram-view_height;
     	width: @histogram-view_width;
-    	background-color: yellow;
-    	#bar-histogram{
+    	#histogram-main{
+            position: absolute;
     		background-color: @test-background1;
     		height: @bar-histogram_height;
     		width: @bar-histogram_width;
     	}
-    	#his-info{
+    	#histogram-info{
+            position: absolute;
     		background-color: @test-background2;
+            left:  @bar-histogram_width;
     		height: @his-info_height;
     		width: @his-info_width;
     	}
