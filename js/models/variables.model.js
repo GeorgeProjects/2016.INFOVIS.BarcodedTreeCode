@@ -14,6 +14,7 @@ define([
         defaults: {
             'finishInit':false,
             'loading':true, //whether loading page show
+            'virtualNodeDescription' : 'virtual',//给virtual的结点的description的标签
             'fileNameArray': [  '20120121-R06-81XX.csv',
                                 '20120121-R07-75XX.csv',
                                 '20120121-R07-77XX.csv',

@@ -405,7 +405,7 @@ define([
 				function _virtualize(root)
 				{
 					root.continuous_repeat_time = 1;//假定虚拟结点root一定处在他所在的group中的第一个的位置
-					var virtualNodeDescription = 'virtual';
+					var virtualNodeDescription = Variables.get('virtualNodeDescription');
 					_traverse_virtualize(root, virtualNodeDescription);
 					function _traverse_virtualize(root, virtual_node_description)
 					{
