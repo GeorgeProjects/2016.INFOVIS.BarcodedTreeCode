@@ -6,7 +6,7 @@ define([
     'backbone',
     'datacenter',
     'variables',
-    'views/histogram.view',
+    'views/histogram-main.view',
     'text!templates/layoutDiv.tpl',
     'jquery-ui',
 ], function(require, Mn, _, $, Backbone, Datacenter, Variables, HistogramView, Tpl, jqueryUI) {

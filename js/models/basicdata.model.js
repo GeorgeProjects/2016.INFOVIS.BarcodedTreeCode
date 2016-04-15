@@ -34,7 +34,9 @@ define([
 						_fileDataArray[index] = d;
 						def_array[index].resolve();
 					});
+
 				});
+
 				self.set('fileCSVDataArray', _fileDataArray);
 			}
 		},
@@ -211,6 +213,7 @@ define([
 		},
 		//将operator_root合并到target_root上，并且要求这两个root都是已经实际建出来的树的结点，而不能为空
 		//只调整.trees_values[]和.children[]
+		//merge正确性没有测过
 		merge_trees: function(operator_root,target_root)
 		{
 			var self = this;
@@ -419,7 +422,7 @@ define([
 				function _virtualize(root)
 				{
 					root.continuous_repeat_time = 1;//假定虚拟结点root一定处在他所在的group中的第一个的位置
-					var virtualNodeDescription = 'virtual';
+					var virtualNodeDescription = Variables.get('virtualNodeDescription');
 					_traverse_virtualize(root, virtualNodeDescription);
 					function _traverse_virtualize(root, virtual_node_description)
 					{
