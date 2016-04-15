@@ -58,6 +58,9 @@ define([
 			self.reorder_tree(root);
 			self.cal_all_pattern_marking(root,true);
 			self.cal_routes(root);
+
+			//self.reorder_tree(root);
+
 			var resultArray = self.linearlize(root);
 			return resultArray;
 		},
@@ -75,7 +78,7 @@ define([
 				curElement.vpi = curElement["VPI/VCI"].substr(0,10);
 				if (_has_chinese_character(curElement.vpi))
 				{
-					console.log('precess_csv error, vpi contains chinese charater');
+					console.log('process_csv warning, original vpi contains chinese charater');
 				}
 				
 				//注意cid的可能是两位数，可能是三位数，所以不能直接截两位
@@ -101,7 +104,7 @@ define([
 		{
 			var resultDataList = _.filter(init_data_list,
 				function (element){
-					return element['ATM数据'] == '有效数据';
+					return (element['ATM数据'] == '有效数据') && (element['VPI/VCI'].length >= 10);//滤掉element['VPI/VCI']是"; CID编号: "的情况
 				});
 			return resultDataList;
 		},
@@ -349,6 +352,14 @@ define([
 				if (typeof(root.children) == 'undefined')
 					return;
 				
+				//用sort会出错
+				//curChildrenGroup.sort(function(a,b){
+				//	var a_ = a.name;
+				//	var b_ = b.name;
+				//	return a_ > b_;
+				//	//return a.name > b.name;//按字典序从小到大排
+				//})
+				
 				var curChildrenGroupSize = curChildrenGroup.length;
 				if (curChildrenGroupSize != 1)
 				{
@@ -367,8 +378,9 @@ define([
 						}
 					}
 				}
+
 				//对每个子递归地整理顺序
-				for (var i = 0;i < curChildrenGroupSize;++i)
+				for (var i = 0;i < curChildrenGroup.length;++i)
 				{
 					_reorder_tree_traverse(root.children[i]);
 				}
@@ -558,7 +570,9 @@ define([
 		cal_routes: function (root)
 		{
 			var self = this;
-			root.route = (typeof(root._father) != 'undefined') ? root._father.route + root.name : root.name;
+			root.route = (typeof(root._father) != 'undefined') ? _.clone(root._father.route) : [];//赋值father的route时要深拷贝
+			root.route.push(root.name);
+
 			//对每个子递归计算
 			if ( ! _.has(root,'children'))
 				return;

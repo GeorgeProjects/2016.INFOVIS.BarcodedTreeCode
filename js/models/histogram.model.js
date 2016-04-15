@@ -31,7 +31,7 @@ define([
 			self.basicDataModel.set('fileLinearDataArray',fileLinearDataArray);
 			//iterate the array to get the histogram information we needed when draw the histogram 
 			//store into the histogramAttr
-			//console.log(fileLinearDataArray);
+			console.log(fileLinearDataArray);
 
 			var fileNameArray = Variables.get('fileNameArray');
 			if (fileNameArray.length != fileLinearDataArray.length)
