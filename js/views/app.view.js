@@ -6,7 +6,7 @@ define([
     'backbone',
     'datacenter',
     'variables',
-    'views/histogram-main.view',
+    'views/histogram.view',
     'text!templates/layoutDiv.tpl',
     'jquery-ui',
 ], function(require, Mn, _, $, Backbone, Datacenter, Variables, HistogramView, Tpl, jqueryUI) {
@@ -36,8 +36,8 @@ define([
                 self.listenTo(Variables, 'change:finishInit', function(model, finishInit){
                     if(finishInit) {
                         self.loaded();
+                        console.log('init finish');
                         Variables.set("loading",false);
-                        Datacenter.mapModel.set("parameterControlShow",false);
                     }
                 });
                 self.listenTo(Variables, 'change:loading', function(model, loading){

@@ -19,32 +19,27 @@ define([
 			var self = this;
 			var _fileDataArray = [];
 			var fileNameArray = Variables.get('fileNameArray');
-			d3.csv('data/' + fileNameArray[0],function(d){
-				def_array[0].resolve();
-				_fileDataArray[0] = d;
-			});
-			for(var i = 1;i < fileNameArray.length;i++){
-				/*
-				* the reason that we use index to record the i is that when run in this function,
-				* i has already changed
-				*/
-				var index = i;
-				$.when(def_array[i - 1]).done(function(){
-					d3.csv('data/' + fileNameArray[index],function(d){
-						_fileDataArray[index] = d;
-						def_array[index].resolve();
-					});
-
-				});
-
-				self.set('fileCSVDataArray', _fileDataArray);
+			for(var i = 0;i < fileNameArray.length; i++){
+				var fileName = fileNameArray[i];
+				var def = def_array[i];
+				self.load_single_data(fileName, def, i, _fileDataArray);
 			}
+			$.when.apply($, def_array).done(function(){
+				self.set('fileCSVDataArray', _fileDataArray);
+			});
+		},
+		load_single_data: function(file_name, def, index, data_array){
+			var dataArray = [];
+			d3.csv('data/' + file_name, function(d){
+				dataArray = d;
+				data_array[index] = d;
+				def.resolve();
+			});
 		},
 		linearlize_data: function(def){
 			var self = this;
 			var _fileCSVDataArray = self.get('fileCSVDataArray');
 			var _fileLinearDataArray = [];
-			
 			for(var i = 0;i < _fileCSVDataArray.length;i++){
 				_fileLinearDataArray[i] = self.packed_csvdata_to_lineartree(_fileCSVDataArray[i], i);
 			}
@@ -55,25 +50,14 @@ define([
 		packed_csvdata_to_lineartree: function(csv_data_array,curtree_index)
 		{
 			var self = this;
-			self.process_csv(csv_data_array);//将csv读出的数组转化成datalist格式
-			var filteredDataArray = self.filter(csv_data_array);
-
+			self.process_csv(csv_data_array);
+			var filteredDataArray = self.filter(csv_data_array);//filteredDataArray是可以直接使用的datalist形式了
 			//建树，计算._depth, ._father, .children[], .description, .name, 为叶子节点给出.trees_values[]
 			var root = self.build_tree(filteredDataArray,curtree_index);
-			
-			//为非叶子节点计算.trees_values[]
 			self.aggregate_separate_tree_value(root);
-			
-			//对每个.children[]中的结点组，按照节点名字的字典序从小到大排
 			self.reorder_tree(root);
-			
-			//计算.continuous_repeat_time, .nth_different_tree, .maximum_continuous_repeat_group_size, 增加虚拟结点并进行修正
 			self.cal_all_pattern_marking(root,true);
-			
-			//计算.route[]
 			self.cal_routes(root);
-			
-			//对得到的树按深度优先线性化，计算.linear_index
 			var resultArray = self.linearlize(root);
 			return resultArray;
 		},
@@ -95,7 +79,7 @@ define([
 				}
 				
 				//注意cid的可能是两位数，可能是三位数，所以不能直接截两位
-				var curCID = curElement['VPI/VCI'].substr(19,curElement['VPI/VCI'].length-19);
+				var curCID = +curElement['VPI/VCI'].substr(19,curElement['VPI/VCI'].length-19);
 				if (curCID != '')//如果没有cid，不要硬加上
 				{
 					curElement.cid = curCID;
@@ -213,7 +197,6 @@ define([
 		},
 		//将operator_root合并到target_root上，并且要求这两个root都是已经实际建出来的树的结点，而不能为空
 		//只调整.trees_values[]和.children[]
-		//merge正确性没有测过
 		merge_trees: function(operator_root,target_root)
 		{
 			var self = this;
@@ -422,7 +405,7 @@ define([
 				function _virtualize(root)
 				{
 					root.continuous_repeat_time = 1;//假定虚拟结点root一定处在他所在的group中的第一个的位置
-					var virtualNodeDescription = Variables.get('virtualNodeDescription');
+					var virtualNodeDescription = 'virtual';
 					_traverse_virtualize(root, virtualNodeDescription);
 					function _traverse_virtualize(root, virtual_node_description)
 					{
@@ -575,9 +558,7 @@ define([
 		cal_routes: function (root)
 		{
 			var self = this;
-			root.route = (typeof(root._father) != 'undefined') ? _.clone(root._father.route) : [];//赋值father的route时要深拷贝
-			root.route.push(root.name);
-
+			root.route = (typeof(root._father) != 'undefined') ? root._father.route + root.name : root.name;
 			//对每个子递归计算
 			if ( ! _.has(root,'children'))
 				return;

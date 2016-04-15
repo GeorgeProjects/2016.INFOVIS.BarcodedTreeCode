@@ -1,8 +1,5 @@
 /**
- * Created by aji on 15/8/29.
- * Backbone不支持namespace
- * 需要改写_createElement函数
- * 另外改写_setElement函数,this.d3为d3 selector
+ * 
  */
 define(['jquery', 'underscore', 'backbone', 'd3'], function ($, _, Backbone, d3) {
     'use strict';

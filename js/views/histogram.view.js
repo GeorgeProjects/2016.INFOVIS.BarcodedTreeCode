@@ -14,6 +14,7 @@ define([
 	'text!templates/histogramView.tpl'
 ], function(require, Mn, _, $, Backbone, d3, Datacenter, Config, Variables, HistogramMain, HistogramInfo, Tpl){
 	'use strict';
+	
 	return Mn.LayoutView.extend({
 		tagName:'div',
 		template: _.template(Tpl),
@@ -35,7 +36,7 @@ define([
 
 		onShow: function(){
 			var self = this;
-			self.showChildView('histogramMain',new HistogramMain());
+			self.showChildView('histogramMain',new HistogramMain({model: Datacenter.histogramModel}));
 			self.showChildView('histogramInfo',new HistogramInfo());
 		},
 	});

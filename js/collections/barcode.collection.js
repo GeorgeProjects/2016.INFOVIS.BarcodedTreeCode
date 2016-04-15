@@ -11,11 +11,6 @@ define([
 	'use strict';
 
 	return Backbone.Collection.extend({
-		defaults: {
-			'value': null
-		},
-		initialize: function(){
-
-		}
+		model: BarcodeModel
 	});
 })

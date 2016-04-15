@@ -1,3 +1,19 @@
+/**
+ * []
+ * @param  {[type]} require         [description]
+ * @param  {[type]} Mn              [description]
+ * @param  {[type]} _               [description]
+ * @param  {[type]} $               [description]
+ * @param  {[type]} Backbone        [description]
+ * @param  {[type]} d3              [description]
+ * @param  {[type]} Datacenter      [description]
+ * @param  {[type]} Config          [description]
+ * @param  {[type]} Variables       [description]
+ * @param  {[type]} SVGBase         [description]
+ * @param  {[type]} event           [description]
+ * @param  {[type]} initialize:     function(options [description]
+ * @return {[type]}                 [description]
+ */
 define([
 	'require',
 	'marionette',
@@ -13,36 +29,22 @@ define([
 	'use strict';
 	return Mn.ItemView.extend(_.extend({
 		tagName: 'svg',
-		template: false,
+		template: false, //for the itemview, we must define the template value false
 		attributes:{
-			'style': 'width: 100%, height: 100%'
-			
+			'style': 'width: 100%; height: 100%'
 		},
 		event:{
-			//sort mode change(trigger drawHistogram)
-			//value mode change(trigger drawHistogram)
-			//click help document
-			//double click on bars(trigger barcode drawing)
-			//click on bars(trigger change in descriptions window)
-			//listen to highlight message from barcode view
+			
 		},
 		initialize: function(options){
 			var self = this;
-			console.log("reach")
-
-
-			//use fileInfoData in model
-			//svg (Width,Height)
-			//tip
-
-			//drawHistogram
-
-
-
-
-
-
-
+			/**
+			 * [he attribute in the model is the location and attribute of the rect in the histogram view
+			 * and  we handle this values in the barcode.model.js]
+			 * @type {[type]}
+			 */
+			var model = self.model;
+			
 		}
 	}, SVGBase));
 });
