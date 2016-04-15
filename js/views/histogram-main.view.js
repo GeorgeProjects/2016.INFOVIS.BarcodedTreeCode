@@ -45,7 +45,11 @@ define([
 			 * @type {[type]}
 			 */
 			var model = self.model;
+
 			console.log(this.el);
+			console.log(model);
+			var fileInfoData = model.fileInfoData;
+			
 		}
 	}, SVGBase));
 });

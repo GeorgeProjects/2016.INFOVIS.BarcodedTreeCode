@@ -31,7 +31,7 @@ define([
 			self.basicDataModel.set('fileLinearDataArray',fileLinearDataArray);
 			//iterate the array to get the histogram information we needed when draw the histogram 
 			//store into the histogramAttr
-			console.log(fileLinearDataArray);
+			//console.log(fileLinearDataArray);
 
 			var fileNameArray = Variables.get('fileNameArray');
 			if (fileNameArray.length != fileLinearDataArray.length)
@@ -43,7 +43,7 @@ define([
 			//2. 总结点数 .nonvirtual_sum_node
 			//3. 各层的结点数的数组 .nonvirtual_node_of_level[]
 			//4. 总流量 .sum_flowSize
-			self.fileInfoData = [];
+			self.fileInfoData = [];//model中真正要给view用的内容
 			for (var i = 0;i < fileLinearDataArray.length;++i)
 			{
 				var curLinearTree = fileLinearDataArray[i];
@@ -89,11 +89,7 @@ define([
 					return nonvirtualNodeOfLevel;
 				}
 			}
-			console.log(self.fileInfoData)
-
-
-
-
+			//console.log(self.fileInfoData)
 		}	
 	});
 })
