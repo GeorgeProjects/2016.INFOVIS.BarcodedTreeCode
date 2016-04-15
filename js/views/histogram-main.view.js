@@ -31,7 +31,8 @@ define([
 		tagName: 'svg',
 		template: false, //for the itemview, we must define the template value false
 		attributes:{
-			'style': 'width: 100%; height: 100%'
+			style: 'width: 100%; height: 100%;',
+			id: 'histogram-main-svg'
 		},
 		event:{
 			
@@ -44,7 +45,7 @@ define([
 			 * @type {[type]}
 			 */
 			var model = self.model;
-			
+			console.log(this.el);
 		}
 	}, SVGBase));
 });
