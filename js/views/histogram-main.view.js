@@ -154,39 +154,34 @@ define([
 			var yScale = d3.scale.linear()
 								.domain([0, Math.log(maxNum)])
 								.range([height, 0]);
-			var hisWidth = xScale(1) - 1;
 
-			pile_bars(1,value_dim);			
-			function pile_bars(level,value_dim)
-			{
-				var bias=2;//为了避免L0结点显示不出来而加的bias
-				chart.selectAll(".bar")
-		 		.data(data_array)
-		 		.enter()
-		 		.append("rect")
-		 		.attr("id",function(d, i){
-					return "his-" + d.time_index;
-				})
-				.attr("index", function(d, i) {
-					return d.time_index;
-				})
-				.attr("class", function(d, i) {
-					var className = "bar";
-					return className;
-				})
-				.attr("width", function() {
-					return xScale(1) - 1;
-				})
-				.attr("height",function(d,i){//height是柱子本身的高度
-					return height - yScale(Math.log(d[value_dim])) - 1;
-				})
-				.attr("x",function(d,i){ 
-					return xScale(i) + 1;
-				})
-				.attr("y",function(d){//y是柱子的位置
-					return yScale(Math.log(d[value_dim]));
-				})
-			}
+			//画柱状图
+			chart.selectAll(".bar")
+		 	.data(data_array)
+		 	.enter()
+		 	.append("rect")
+		 	.attr("id",function(d, i){
+				return "his-" + d.time_index;
+			})
+			.attr("index", function(d, i) {
+				return d.time_index;
+			})
+			.attr("class", function(d, i) {
+				var className = "bar";
+				return className;
+			})
+			.attr("width", function() {
+				return xScale(1) - 1;
+			})
+			.attr("height",function(d,i){//height是柱子本身的高度
+				return height - yScale(Math.log(d[value_dim])) - 1;
+			})
+			.attr("x",function(d,i){ 
+				return xScale(i) + 1;
+			})
+			.attr("y",function(d){//y是柱子的位置
+				return yScale(Math.log(d[value_dim]));
+			})
 
 			// draw x-axis ticks
 			if (sort_mode == "time") {
