@@ -49,7 +49,7 @@ define([
 			console.log(model);
 			console.log(fileInfoData);
 
-			var sortMode = "value";//取"time"或"value"
+			var sortMode = "time";//取"time"或"value"
 			var valueDim = "sum_flowSize";//取"sum_flowSize"或"nonvirtual_sum_node"
 
 			self.draw_histogram(fileInfoData,sortMode,valueDim);
@@ -102,7 +102,7 @@ define([
 				.orient("bottom")
 				.ticks(0)			
 			var xAxisGroup = chart.append("g")
-			   .attr("class","x axis")
+			   .attr("class","x-axis")
 			   .attr("transform","translate(" + 0 + "," + height + ")")
 			   .call(xAxis)
 			xAxisGroup.append("text")
@@ -110,17 +110,17 @@ define([
 			   .attr("x",width)
 			   .attr("y",axisTextY)
 			   .style("text-anchor","end")
-			   .text("Date");
+			   .text("Date");//x轴末端的轴标
+
 			// draw y-axis
 			var yAxisMin = 0;
 			var yAxisMax = Math.round(Math.log(maxNum));
-
 			var yAxisScale = d3.scale.linear()
 				.domain([yAxisMax, yAxisMin])
 				.range([0, height]);
+
 			var yAxisTicks = [];
 			yAxisTicks[0] = 0;
-			
 			for(var i = 1; ; i = i + 1){
 				yAxisTicks[i] = yAxisTicks[i-1] + 2;//每隔2标一下
 				if(yAxisTicks[i] > yAxisMax - 2){
@@ -133,7 +133,7 @@ define([
 				.orient("left")
 				.tickValues(yAxisTicks);
 			chart.append("g")
-				.attr("class","y axis")
+				.attr("class","y-axis")
 				.call(yAxis)
 				.append("text")
 				.attr("transform","rotate(-90)")
@@ -142,11 +142,11 @@ define([
 				.attr("y",-25)
 				.style("text-anchor","end")
 				.text(function(){
-						if (value_dim == "sum_flowSize")
-							return "log(Number\n(bytes))";
-						else if (value_dim == "nonvirtual_sum_node")
-							return "log(Number\n(nodes))";
-					});
+					if (value_dim == "sum_flowSize")
+						return "log(Number\n(bytes))";
+					else if (value_dim == "nonvirtual_sum_node")
+						return "log(Number\n(nodes))";
+				});
 			//draw chart bars
 			var xScale = d3.scale.linear()
 						.domain([0, data_array.length])
@@ -156,18 +156,15 @@ define([
 								.range([height, 0]);
 			var hisWidth = xScale(1) - 1;
 
-		
-			pile_bars(1,value_dim);
-			
+			pile_bars(1,value_dim);			
 			function pile_bars(level,value_dim)
 			{
 				var bias=2;//为了避免L0结点显示不出来而加的bias
-				chart.selectAll(".bar"+" level-"+level)
+				chart.selectAll(".bar")
 		 		.data(data_array)
 		 		.enter()
 		 		.append("rect")
 		 		.attr("id",function(d, i){
-		 			//console.log(d);
 					return "his-" + d.time_index;
 				})
 				.attr("index", function(d, i) {
@@ -183,14 +180,14 @@ define([
 				.attr("height",function(d,i){//height是柱子本身的高度
 					return height - yScale(Math.log(d[value_dim])) - 1;
 				})
-				.attr("x",function(d){ 
-					return xScale(d.position) + 1;
+				.attr("x",function(d,i){ 
+					return xScale(i) + 1;
 				})
 				.attr("y",function(d){//y是柱子的位置
 					return yScale(Math.log(d[value_dim]));
 				})
-				.classed(("level-" + level),true)
 			}
+
 			// draw x-axis ticks
 			if (sort_mode == "time") {
 				var xBegin = 0;
@@ -205,6 +202,7 @@ define([
 					}
 				}			
 			}
+			
 		}
 
 	}, SVGBase));
