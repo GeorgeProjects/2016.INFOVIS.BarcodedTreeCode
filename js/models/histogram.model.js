@@ -89,7 +89,6 @@ define([
 					return nonvirtualNodeOfLevel;
 				}
 			}
-			//console.log(self.fileInfoData)
 		}	
 	});
 })

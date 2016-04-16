@@ -37,7 +37,7 @@ define([
 		onShow: function(){
 			var self = this;
 			self.showChildView('histogramMain',new HistogramMain({model: Datacenter.histogramModel}));
-			self.showChildView('histogramInfo',new HistogramInfo());
+			self.showChildView('histogramInfo',new HistogramInfo({model: Datacenter.histogramModel}));
 		},
 	});
 });
