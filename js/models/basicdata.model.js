@@ -352,33 +352,14 @@ define([
 				if (typeof(root.children) == 'undefined')
 					return;
 				
-				//用sort会出错
-				//curChildrenGroup.sort(function(a,b){
-				//	var a_ = a.name;
-				//	var b_ = b.name;
-				//	return a_ > b_;
-				//	//return a.name > b.name;//按字典序从小到大排
-				//})
+				curChildrenGroup.sort(function(a,b){
+					if (a.name > b.name)//按名字的字典序排序
+						return 1;
+					else
+						return -1;
+					//不能直接写return a.name > b.name;否则会排序出错
+				})
 				
-				var curChildrenGroupSize = curChildrenGroup.length;
-				if (curChildrenGroupSize != 1)
-				{
-					for (var i = curChildrenGroupSize - 1; i >= 0;--i)
-					{
-						for (var j = i-1;j >= 0;--j) 
-						{
-							var curChild1 = curChildrenGroup[j];
-							var curChild2 = curChildrenGroup[i];
-							//要让名字的字典序更靠前的结点排在前面
-							if (curChild1.name > curChild2.name)
-							{
-								curChildrenGroup[i] = curChild1;
-								curChildrenGroup[j] = curChild2;
-							}
-						}
-					}
-				}
-
 				//对每个子递归地整理顺序
 				for (var i = 0;i < curChildrenGroup.length;++i)
 				{
