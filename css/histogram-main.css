@@ -1,0 +1,47 @@
+.text{
+  font-size: 12px;
+}
+.time{
+  font-size: 12px;
+}
+.size{
+  font-size: 12px;
+}
+.tick_label{
+  font-size: 12px;
+}
+#histogram-main-svg {
+  text-align: center;
+}
+
+
+#mainTimeline .current {
+  fill: #1F77B4;
+  stroke: #b2df8a;
+  stroke-width: 2px;
+}
+
+#mainTimeline .selected {
+  fill: #1F77B4;
+}
+
+.label-wrapper > .label  {
+  pointer-events: none;
+  cursor: not-allowed;  
+  color: white;
+}
+
+#tree-select-controller {
+  text-align: right;
+}
+
+
+#label-C {
+  margin-top: 0.3em;
+  padding-top: 0.3em;
+  border-top: 2px solid #ddd;
+}
+rect[class~=click-highlight]{
+  stroke: #dddd00;
+  stroke-width: 2px;
+}

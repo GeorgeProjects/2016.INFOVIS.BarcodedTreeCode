@@ -167,7 +167,7 @@ define([
 		 		.enter()
 		 		.append("rect")
 		 		.attr("id",function(d, i){
-		 			console.log(d);
+		 			//console.log(d);
 					return "his-" + d.time_index;
 				})
 				.attr("index", function(d, i) {
