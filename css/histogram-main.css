@@ -13,10 +13,29 @@
 }
 
 .x-axis{
-  height : 1px;
   stroke-width : 2px;
+}
+.x-axis path{/*x轴线*/
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.x-axis line{/*x轴上刻度标*/
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
 
 .y-axis{
   stroke-width : 2px;
+}
+.y-axis path{/*y轴线*/
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.y-axis line{/*y轴上刻度标*/
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
