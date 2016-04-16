@@ -27,11 +27,11 @@ define([
 
 			var model = self.model;
 			var fileInfoData = model.fileInfoData;
-			var svg = self.el;
+			var svg = self.d3el;
 
-			console.log(model);
-			console.log(fileInfoData);
-			console.log(svg);
+			//console.log(model);
+			//console.log(fileInfoData);
+			//console.log(svg);
 		}
 	}, SVGBase))
 })

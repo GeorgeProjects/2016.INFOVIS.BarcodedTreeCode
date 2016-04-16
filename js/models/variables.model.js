@@ -17,6 +17,9 @@ define([
             'virtualNodeDescription' : 'virtual',//给virtual的结点的description的标签
             'fileNameArray': [  '20120121-R06-81XX.csv',
                                 '20120121-R07-75XX.csv',
+                                '20120121-R07-77XX.csv']
+            /*'fileNameArray': [  '20120121-R06-81XX.csv',
+                                '20120121-R07-75XX.csv',
                                 '20120121-R07-77XX.csv',
                                 '20120121-R08-76XX.csv',
                                 '20120122-R05-72XX.csv',
@@ -107,7 +110,7 @@ define([
                                 '20130804-R05-72XX.csv',
                                 '20130804-R05-73XX.csv',
                                 '20130805-R05-72XX.csv',
-                                '20130805-R05-73XX.csv']
+                                '20130805-R05-73XX.csv']*/
                 },
     }))();
 });

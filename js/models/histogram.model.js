@@ -43,6 +43,7 @@ define([
 			//2. 总结点数 .nonvirtual_sum_node
 			//3. 各层的结点数的数组 .nonvirtual_node_of_level[]
 			//4. 总流量 .sum_flowSize
+			//5. 时间序号 .time_index
 			self.fileInfoData = [];//model中真正要给view用的内容
 			for (var i = 0;i < fileLinearDataArray.length;++i)
 			{
@@ -53,6 +54,7 @@ define([
 				self.fileInfoData[i].file_name = fileNameArray[i];
 				self.fileInfoData[i].nonvirtual_node_of_level = _cal_nonvirtual_node_of_level(curRoot);
 				self.fileInfoData[i].nonvirtual_sum_node = 0;
+				self.fileInfoData[i].time_index = i;
 				for (var j = 0;j < self.fileInfoData[i].nonvirtual_node_of_level.length;++j)
 				{
 					self.fileInfoData[i].nonvirtual_sum_node += self.fileInfoData[i].nonvirtual_node_of_level[j];
