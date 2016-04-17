@@ -16,6 +16,7 @@ define([
             'loading':true, //whether loading page show
             'virtualNodeDescription' : 'virtual',//给virtual的结点的description的标签
             'currentSelectBarIndex' : 0,//存储最后一个被选中的bar对应的数据在文件数组中的index，即时间维的index
+            'selectBarArray' : [],
             'histogramSortMode' : 'time',//取"time"或"value"
             'histogramValueDim' : 'sum_flowSize',//取"sum_flowSize"或"nonvirtual_sum_node"
             'fileNameArray': [  '20120121-R06-81XX.csv',
@@ -112,5 +113,8 @@ define([
                                 '20130805-R05-72XX.csv',
                                 '20130805-R05-73XX.csv']
                 },
+        initialize: function(){
+            console.log(self)
+        },
     }))();
 });

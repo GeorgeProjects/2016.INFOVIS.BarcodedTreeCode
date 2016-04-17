@@ -47,13 +47,19 @@ define([
 			 * and  we handle this values in the barcode.model.js]
 			 * @type {[type]}
 			 */
+
+			
+
+
+
+
 			var model = self.model;
 			var fileInfoData = model.fileInfoData;
 
 			var sortMode = Variables.get('histogramSortMode');//取"time"或"value"
 			var valueDim = Variables.get('histogramValueDim');//取"sum_flowSize"或"nonvirtual_sum_node"
 			self.draw_histogram(fileInfoData,sortMode,valueDim);
-			
+
 			self.listenTo(Variables,'change:histogramSortMode change:histogramValueDim',function(model,value){
 				var sortMode = Variables.get('histogramSortMode');//取"time"或"value"
 				var valueDim = Variables.get('histogramValueDim');//取"sum_flowSize"或"nonvirtual_sum_node"
@@ -84,7 +90,6 @@ define([
 					return a_val - b_val;//比数字时不能换成>，否则会转成字符串排出错误结果
 				})
 			}
-			//console.log(data_array);
 
 /*
 			var tip = d3.tip()
