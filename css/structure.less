@@ -1,6 +1,6 @@
 body{
     font-family: @font-family1;
-    // top:80px;
+    /* top:80px; */
     font-size:12px;
 
     moz-user-select: -moz-none;
@@ -35,34 +35,32 @@ body{
             position: absolute;
     		background-color: @test-background1;
     		height: @bar-histogram_height;
-    		width: 85%;/*@bar-histogram_width;*/
-            border: @frame-border;
-    	}
-
-    	#histogram-info{
-            position: absolute;
-    		background-color: @test-background2;
-            left:  85%;/*@bar-histogram_width;*/
-    		height: @his-info_height;
-    		width: 10%;/*@his-info_width;*/
+    		width: @bar-histogram_width;
             border: @frame-border;
     	}
 
         #histogram-panel{
             position: absolute;
-            background-color: @test-background2;
-            left:  95%;
-            height: @his-info_height;
-            width: 5%;/*@his-info_width;*/
+            background-color: @test-background1;
+            left:  @his-panel_left;
+            height: @his-panel_height;
+            width: @his-panel_width;
             border: @frame-border;
         }
 
-
+    	#histogram-info{
+            position: absolute;
+    		background-color: @test-background1;
+            left:  @his-info_left;
+    		height: @his-info_height;
+    		width: @his-info_width;
+            border: @frame-border;
+    	}
 
     }
     #barcode-view{
     	position: absolute;
-    	background-color: test-background3;
+    	background-color: test-background1;
     	top:  @histogram-view_height;
     	height: @barcode-view_height;
     	width: @barcode-view_width;
