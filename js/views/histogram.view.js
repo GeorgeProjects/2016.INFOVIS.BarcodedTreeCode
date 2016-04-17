@@ -40,7 +40,9 @@ define([
 			var self = this;
 			self.showChildView('histogramMain',new HistogramMain({model: Datacenter.histogramModel}));
 			self.showChildView('histogramInfo',new HistogramInfo({model: Datacenter.histogramModel}));
-			self.showChildView('histogramPanel',new HistogramPanel());
+			var histogramPanel = new HistogramPanel();
+			self.showChildView('histogramPanel',histogramPanel);
+			histogramPanel.bind();//按钮的绑定放在初始化以及template的绑定结束后，否则无法找到按钮来绑定
 		},
 	});
 });

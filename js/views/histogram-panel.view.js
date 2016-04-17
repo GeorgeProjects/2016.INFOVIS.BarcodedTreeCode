@@ -27,15 +27,40 @@ define([
 		initialize: function(options){
 			var self = this;
 			var model = self.model;
-			console.log("reach!!!!")
-
-
+		},
+		bind: function(){
+			var self = this;
 
 			// click on sort buttons
-			$("#histogram-panel .sort-btn").click(function() {
-				$("#innerTopLeft .sort-btn").removeClass("active");
+			self.$el.find(".sort-btn").click(function() {
+				$("#histogram-panel .sort-btn").removeClass("active");
 				$(this).addClass("active");
-				sortMode = $(this).attr("sort-type");
+				var sortMode = $(this).attr("sort-type");//取"time"或"value"
+				Variables.set("histogramSortMode",sortMode);
+			});
+
+			// click on 按树的数值决定高度与树的结点数决定高度之间切换 的 按钮
+			self.$el.find(".datadim-btn").click(function() {
+				$("#histogram-panel .datadim-btn").removeClass("active");
+				$(this).addClass("active");
+				var datadimMode = $(this).attr("datadim-type");//取"sum_flowSize"或"nonvirtual_sum_node"
+				Variables.set("histogramValueDim",datadimMode);
+			});
+
+			self.$el.find("#help").click(function(){
+				console.log("!!!")
+				//$("#dialog-confirm").dialog("open");
+			});
+
+
+
+
+			/*
+			// click on sort buttons
+			$("#histogram-panel .sort-btn").click(function() {
+				$("#histogram-panel .sort-btn").removeClass("active");
+				$(this).addClass("active");
+				var sortMode = $(this).attr("sort-type");
 				//sortMode为"time"或"size"
 				
 				console.log("click!!")
@@ -44,9 +69,9 @@ define([
 
 			// click on 按树的数值决定高度与树的结点数决定高度之间切换 的 按钮
 			$("#histogram-panel .datadim-btn").click(function() {
-				$("#innerTopLeft .datadim-btn").removeClass("active");
+				$("#histogram-panel .datadim-btn").removeClass("active");
 				$(this).addClass("active");
-				datadimMode = $(this).attr("datadim-type");
+				var datadimMode = $(this).attr("datadim-type");
 				//datadimMode为"flowsize"或"nodenum"
 
 				console.log("click!!")
@@ -55,8 +80,10 @@ define([
 
 			$('#histogram-panel #help').click(function(){
 				console.log("!!!")
-				$("#dialog-confirm").dialog("open");
+				//$("#dialog-confirm").dialog("open");
 			});
+	*/
+			/*
 			$("#histogram-panel #dialog-confirm").dialog
 			({
 				width:"900",
@@ -80,6 +107,15 @@ define([
 			    }
 
 		    });
+			*/
+
+
+
+
+
+
+
+
 
 
 

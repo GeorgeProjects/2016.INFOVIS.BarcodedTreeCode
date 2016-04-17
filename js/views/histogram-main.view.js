@@ -49,13 +49,16 @@ define([
 			 */
 			var model = self.model;
 			var fileInfoData = model.fileInfoData;
-			//console.log(model);
-			//console.log(fileInfoData);
 
-			var sortMode = "time";//取"time"或"value"
-			var valueDim = "sum_flowSize";//取"sum_flowSize"或"nonvirtual_sum_node"
-
+			var sortMode = Variables.get('histogramSortMode');//取"time"或"value"
+			var valueDim = Variables.get('histogramValueDim');//取"sum_flowSize"或"nonvirtual_sum_node"
 			self.draw_histogram(fileInfoData,sortMode,valueDim);
+			
+			self.listenTo(Variables,'change:histogramSortMode change:histogramValueDim',function(model,value){
+				var sortMode = Variables.get('histogramSortMode');//取"time"或"value"
+				var valueDim = Variables.get('histogramValueDim');//取"sum_flowSize"或"nonvirtual_sum_node"
+				self.draw_histogram(fileInfoData,sortMode,valueDim);
+			})
 		},
 		draw_histogram: function(original_data,sort_mode,value_dim)
 		{

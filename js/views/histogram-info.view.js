@@ -30,7 +30,7 @@ define([
 			var fileInfoData = model.fileInfoData;
 
 			var currentSelectBarIndex = Variables.get('currentSelectBarIndex');
-			self.update_inner_top_right_description(fileInfoData,currentSelectBarIndex);
+			//self.update_inner_top_right_description(fileInfoData,currentSelectBarIndex);
 			self.listenTo(Variables,'change:currentSelectBarIndex',function(model,value){
 				self.update_inner_top_right_description(fileInfoData,value);
 			})
@@ -41,7 +41,7 @@ define([
 				return curFile.time;
 			});
 			$("#histogram-info .value_description").text(function() {
-				return d3.format(".3s")(curFile.sum_flowSize) + "bytes";
+				return d3.format(".3s")(curFile.sum_flowSize) + "bytes";//转换成M，G之类的单位
 			});
 			$("#histogram-info .level_description").text(function() {
 				return curFile.nonvirtual_node_of_level.length;

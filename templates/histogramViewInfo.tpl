@@ -1,5 +1,5 @@
 <span class="date_text">
-	<strong class='tttt'>Date: </strong>
+	<strong>Date: </strong>
 </span><br/>
 <span class="date_description"></span><br/>
 <span class="value_text">
