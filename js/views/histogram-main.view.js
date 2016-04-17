@@ -197,11 +197,35 @@ define([
 			.attr("y",function(d){//y是柱子的位置
 				return yScale(Math.log(d[value_dim]));
 			})
-			.on("mouseover",function(d,i)
-			{
-				Variables.set("currentSelectBarIndex",d.time_index);
+			.on("mouseover",function(d,i){
 				//tip.show(d);
 			})
+			.on("mouseout",function(d,i){
+				//tip.hide(d);
+			})
+			.on("click",function(d,i){
+				Variables.set("currentSelectBarIndex",d.time_index);
+				
+				d3.selectAll('#histogram-main .bar').classed("oneclick-highlight",false);
+				d3.select(this).classed("oneclick-highlight", true);
+			})
+			.on("dblclick",function(d,i){
+
+				if (d3.select(this).classed("dbclick-selected"))//如果之前已经双击高亮，双击以后解除单击高亮，解除双击高亮
+				{
+					d3.select(this).classed("oneclick-highlight",false);
+					d3.select(this).classed("dbclick-selected",false);
+				}
+				else//如果之前没有双击高亮，双击以后增加双击高亮，
+				{
+					d3.select(this).classed("dbclick-selected",true);
+				}
+
+				//changeComparedData(compareNum);
+			})
+
+
+
 
 			// draw x-axis ticks
 			if (sort_mode == "time") {
