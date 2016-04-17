@@ -11,8 +11,9 @@ define([
 	//'views/svg-base.addon', the function of this file
 	'views/histogram-main.view',
 	'views/histogram-info.view',
+	'views/histogram-panel.view',
 	'text!templates/histogramView.tpl'
-], function(require, Mn, _, $, Backbone, d3, Datacenter, Config, Variables, HistogramMain, HistogramInfo, Tpl){
+], function(require, Mn, _, $, Backbone, d3, Datacenter, Config, Variables, HistogramMain, HistogramInfo, HistogramPanel, Tpl){
 	'use strict';
 	
 	return Mn.LayoutView.extend({
@@ -22,6 +23,7 @@ define([
 		regions:{
 			'histogramMain': '#histogram-main',
 			'histogramInfo': '#histogram-info',
+			'histogramPanel': '#histogram-panel',
 		},
 
 		attributes:{
@@ -38,6 +40,7 @@ define([
 			var self = this;
 			self.showChildView('histogramMain',new HistogramMain({model: Datacenter.histogramModel}));
 			self.showChildView('histogramInfo',new HistogramInfo({model: Datacenter.histogramModel}));
+			self.showChildView('histogramPanel',new HistogramPanel());
 		},
 	});
 });

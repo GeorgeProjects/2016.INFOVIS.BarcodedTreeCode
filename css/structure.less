@@ -35,17 +35,30 @@ body{
             position: absolute;
     		background-color: @test-background1;
     		height: @bar-histogram_height;
-    		width: @bar-histogram_width;
+    		width: 85%;/*@bar-histogram_width;*/
             border: @frame-border;
     	}
+
     	#histogram-info{
             position: absolute;
     		background-color: @test-background2;
-            left:  @bar-histogram_width;
+            left:  85%;/*@bar-histogram_width;*/
     		height: @his-info_height;
-    		width: @his-info_width;
+    		width: 10%;/*@his-info_width;*/
             border: @frame-border;
     	}
+
+        #histogram-panel{
+            position: absolute;
+            background-color: @test-background2;
+            left:  95%;
+            height: @his-info_height;
+            width: 5%;/*@his-info_width;*/
+            border: @frame-border;
+        }
+
+
+
     }
     #barcode-view{
     	position: absolute;

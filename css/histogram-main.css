@@ -77,10 +77,6 @@
   stroke-width: 2px;
 }
 
-#mainTimeline .selected {
-  fill: #1F77B4;
-}
-
 
 rect[class~=level-1]{
   fill:#C0C0C0;
