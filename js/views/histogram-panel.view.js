@@ -48,12 +48,14 @@ define([
 			});
 
 			self.$el.find("#help").click(function(){
-				$("#dialog-confirm").dialog("open");
+				$(".help_document").dialog("open");
+				$(".help_document").append( 
+					"<img src=\"css/images/signal_tree_interface_intro.png\" class=\"help_img\" width=\"800px\" >"
+			    );
 			});
 
-		
-
-			$("#dialog-confirm").dialog
+			//帮助文档
+			$(".help_document").dialog
 			({
 				width:"900",
 				height:"600",
@@ -62,20 +64,18 @@ define([
 		        buttons: {
 			        "Back": function() {
 			        	d3.selectAll(".help_img").remove()
-			        	$( ".help_document" ).append( 
+			        	$(".help_document").append( 
 			        		"<img src=\"css/images/signal_tree_interface_intro.png\" class=\"help_img\" width=\"800px\" >"
 			        		);
 			        },
 			        "Next": function() {
 			        	d3.selectAll(".help_img").remove()
-			        	$( ".help_document" ).append( 
+			        	$(".help_document").append( 
 			        		"<img src=\"css/images/signal_tree.png\" class=\"help_img\" width=\"550px\" >"
 			        		);
 			        }
 			    }
-
 		    });
-		
 
 		}
 	})

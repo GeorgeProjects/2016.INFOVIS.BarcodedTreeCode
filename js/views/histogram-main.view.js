@@ -48,11 +48,6 @@ define([
 			 * @type {[type]}
 			 */
 
-			
-
-
-
-
 			var model = self.model;
 			var fileInfoData = model.fileInfoData;
 
@@ -66,8 +61,13 @@ define([
 				self.draw_histogram(fileInfoData,sortMode,valueDim);
 			})
 		},
+
+
+		//新开一个函数，把初始化和开始的draw分开来，否则可能select不到！！
+		
 		draw_histogram: function(original_data,sort_mode,value_dim)
 		{
+			console.log(original_data)
 			var self = this;
 			var svg = self.d3el;//此处不能直接用id选svg，因为此时这个svg实际上还没有画出来，只能用self来找
 
@@ -100,8 +100,6 @@ define([
 						});
 			svg.call(tip)			
 */
-
-
 
 			var svgWidth = $("#histogram-main").width();				
 			var svgHeight = $("#histogram-main").height();				
@@ -229,10 +227,9 @@ define([
 					d3.select(this).classed("dbclick-selected",true);
 				}
 
+				//画barcode
 				//changeComparedData(compareNum);
 			})
-
-
 
 
 			// draw x-axis ticks
