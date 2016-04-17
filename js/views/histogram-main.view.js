@@ -46,8 +46,8 @@ define([
 			 */
 			var model = self.model;
 			var fileInfoData = model.fileInfoData;
-			console.log(model);
-			console.log(fileInfoData);
+			//console.log(model);
+			//console.log(fileInfoData);
 
 			var sortMode = "time";//取"time"或"value"
 			var valueDim = "sum_flowSize";//取"sum_flowSize"或"nonvirtual_sum_node"
@@ -78,7 +78,7 @@ define([
 					return a_val - b_val;//比数字时不能换成>，否则会转成字符串排出错误结果
 				})
 			}
-			console.log(data_array);
+			//console.log(data_array);
 
 			var svgWidth = $("#histogram-main").width();				
 			var svgHeight = $("#histogram-main").height();				
