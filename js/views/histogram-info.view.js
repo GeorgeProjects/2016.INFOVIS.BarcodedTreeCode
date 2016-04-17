@@ -36,7 +36,32 @@ define([
 			//console.log(svg);
 			console.log(currentSelectBarIndex)
 
-			update_inner_top_right_description(fileInfoData,currentSelectBarIndex);
+			/*
+			svg.append("text")
+                        .attr("x", self.$el.width() / 2 )
+                        .attr("y", self.margin.top / 2)
+                        .style("text-anchor", "middle")
+                        .attr("class","timelineTitle")
+                        .text(function() {
+                               return "Temporal Distribution of Reocrds";
+                        });
+			*/
+			svg.append("span")
+				.attr("class","date_description");
+			svg.append("span")
+				.attr("class","value_description");
+			svg.append("span")
+				.attr("class","level_description");
+			svg.append("span")
+				.attr("class","node_num_description");
+
+			console.log(Variables);
+			console.log(Variables.model)
+			self.listenTo(Variables,'change:currentSelectBarIndex',function(model,value){
+				console.log("ddd",value);
+				update_inner_top_right_description(fileInfoData,value);
+			})
+
 			function update_inner_top_right_description(data_array,compareNum)
 			{
 				console.log(data_array)
@@ -62,13 +87,6 @@ define([
 				}
 				
 			}
-
-
-
-
-
-
-
 
 		}
 	}, SVGBase))

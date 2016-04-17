@@ -15,7 +15,7 @@ define([
             'finishInit':false,
             'loading':true, //whether loading page show
             'virtualNodeDescription' : 'virtual',//给virtual的结点的description的标签
-            'currentSelectBarIndex' : 0,
+            'currentSelectBarIndex' : 0,//存储最后一个被选中的bar对应的数据在文件数组中的index，即时间维的index
             'fileNameArray': [  '20120121-R06-81XX.csv',
                                 '20120121-R07-75XX.csv',
                                 '20120121-R07-77XX.csv',

@@ -182,6 +182,10 @@ define([
 			.attr("y",function(d){//y是柱子的位置
 				return yScale(Math.log(d[value_dim]));
 			})
+			.on("mouseover",function(d,i)
+			{
+				Variables.set("currentSelectBarIndex",d.time_index);
+			})
 
 			// draw x-axis ticks
 			if (sort_mode == "time") {
