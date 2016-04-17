@@ -1,0 +1,12 @@
+#histogram-info {
+  text-align: center;
+  vertical-align: center;
+  float: right;
+  width: 10%;
+  height: 100%;
+  border:0px solid #a0a0a0;
+  padding:0px 0px 0px 0px;
+  overflow-y: scroll;/*右侧的滚轮*/
+  overflow-x: hidden;
+  line-height:1.16;/*右上角窗口中字体的行间距*/
+}

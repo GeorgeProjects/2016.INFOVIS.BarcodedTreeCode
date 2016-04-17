@@ -12,6 +12,9 @@ require.config({
         'marionette': ['../bower_components/marionette/lib/backbone.marionette.min'],
         'backbone.relational': ['../bower_components/backbone-relational/backbone-relational'],
         'd3': ['../bower_components/d3/d3'],
+
+        //'d3-tip': ['../bower_components/d3-tip/d3-tip'],
+
         'highstock': ['../bower_components/highstock/highstock'],
 
         'backbone.routefilter': '../bower_components/backbone.routefilter/dist/backbone.routefilter.min',

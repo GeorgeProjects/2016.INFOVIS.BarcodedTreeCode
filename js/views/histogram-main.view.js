@@ -21,11 +21,14 @@ define([
 	'jquery',
 	'backbone',
 	'd3',
+
+	//'d3-tip',
+
 	'datacenter',
 	'config',
 	'variables',
 	'views/svg-base.addon'
-],function(require, Mn, _, $, Backbone, d3, Datacenter, Config, Variables, SVGBase){
+],function(require, Mn, _, $, Backbone, d3, /*d3Tip,*/ Datacenter, Config, Variables, SVGBase){
 	'use strict';
 	return Mn.ItemView.extend(_.extend({
 		tagName: 'svg',
@@ -79,6 +82,18 @@ define([
 				})
 			}
 			//console.log(data_array);
+
+/*
+			var tip = d3.tip()
+						.attr('class', 'd3-tip')
+						.offset([-10, 0])
+						.html(function(d, i) {
+							console.log("hhhh");
+						});
+			svg.call(tip)			
+*/
+
+
 
 			var svgWidth = $("#histogram-main").width();				
 			var svgHeight = $("#histogram-main").height();				
@@ -185,6 +200,7 @@ define([
 			.on("mouseover",function(d,i)
 			{
 				Variables.set("currentSelectBarIndex",d.time_index);
+				//tip.show(d);
 			})
 
 			// draw x-axis ticks
