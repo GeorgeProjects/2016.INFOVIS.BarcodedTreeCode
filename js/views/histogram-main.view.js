@@ -50,12 +50,9 @@ define([
 				self.draw_histogram(fileInfoData,sortMode,valueDim);
 				self.maintain_highlight();
 			});
-			
 			self.on("UpdateHighlight",function(){
 				self.maintain_highlight();
 			})
-
-
 		},
 		default_display: function(options){
 			var self = this;
@@ -211,7 +208,8 @@ define([
 			})
 			.on("click",function(d,i){
 				//维护全局变量
-				Variables.set("currentSelectBarIndex",d.time_index);
+				Variables.set("maintainingLastSelectBar",true);
+				Variables.set("lastSelectBarIndex",d.time_index);
 				self.trigger("UpdateHighlight");//更新高亮
 			})
 			.on("dblclick",function(d,i){
@@ -220,6 +218,7 @@ define([
 				var index = selectBarArray.indexOf(d.time_index);
 				if (index != -1)//以前双击选中过
 				{
+					Variables.set("maintainingLastSelectBar",false);
 					selectBarArray.splice(index,1);
 				}
 				else
@@ -255,8 +254,11 @@ define([
 
 			//恢复单击的高亮
 			d3.selectAll('#histogram-main .bar').classed("oneclick-highlight",false);
-			var currentSelectBarIndex = Variables.get('currentSelectBarIndex');
-			svg.selectAll("#his-"+currentSelectBarIndex).classed('oneclick-highlight',true)
+			if (Variables.get('maintainingLastSelectBar') == true )
+			{
+				var lastSelectBarIndex = Variables.get('lastSelectBarIndex');
+				svg.selectAll("#his-"+lastSelectBarIndex).classed('oneclick-highlight',true)
+			}
 
 			//恢复双击的高亮
 			d3.selectAll('#histogram-main .bar').classed("dbclick-selected",false);
@@ -265,7 +267,6 @@ define([
 			{
 				svg.selectAll("#his-"+selectBarArray[i]).classed('dbclick-selected',true)
 			}
-			console.log(currentSelectBarIndex,selectBarArray)
 		}
 
 

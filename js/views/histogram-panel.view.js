@@ -21,8 +21,8 @@ define([
 		 template: function() {
                 return _.template(Tpl);
         },
-		event: {
-			
+		events: {
+
 		},
 		initialize: function(options){
 			var self = this;
@@ -38,7 +38,7 @@ define([
 				var sortMode = $(this).attr("sort-type");//取"time"或"value"
 				Variables.set("histogramSortMode",sortMode);
 			});
-
+			
 			// click on 按树的数值决定高度与树的结点数决定高度之间切换 的 按钮
 			self.$el.find(".datadim-btn").click(function() {
 				$("#histogram-panel .datadim-btn").removeClass("active");
