@@ -34,8 +34,8 @@ body{
     	#histogram-main{
             position: absolute;
     		background-color: @test-background1;
-    		height: @bar-histogram_height;
-    		width: @bar-histogram_width;
+    		height: @his-main_height;
+    		width: @his-main_width;
             border: @frame-border;
     	}
 
@@ -65,5 +65,22 @@ body{
     	height: @barcode-view_height;
     	width: @barcode-view_width;
         border: @frame-border;
+
+        #barcode-main{
+            position: absolute;
+            background-color: @test-background1;
+            height: @barcode-main_height;
+            width: @barcode-main_width;
+            border: @frame-border;
+        }
+
+        #barcode-panel{
+            position: absolute;
+            background-color: @test-background1;
+            left:  @barcode-panel_left;
+            height: @barcode-panel_height;
+            width: @barcode-panel_width;
+            border: @frame-border;
+        }
     }
 }

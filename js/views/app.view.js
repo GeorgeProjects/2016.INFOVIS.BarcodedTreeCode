@@ -7,9 +7,10 @@ define([
     'datacenter',
     'variables',
     'views/histogram.view',
+    'views/barcode.view',
     'text!templates/layoutDiv.tpl',
     'jquery-ui',
-], function(require, Mn, _, $, Backbone, Datacenter, Variables, HistogramView, Tpl, jqueryUI) {
+], function(require, Mn, _, $, Backbone, Datacenter, Variables, HistogramView, BarcodeView, Tpl, jqueryUI) {
     'use strict';
 
     return Mn.LayoutView.extend({
@@ -53,6 +54,7 @@ define([
         loaded: function(){
             var self = this;
             self.showChildView('histogramView', new HistogramView());
+            self.showChildView('barcodeView', new BarcodeView());
         }
     });
 });

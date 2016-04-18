@@ -32,6 +32,7 @@ define([
 			var self = this;
 			self.basicDataModel = new BasicDataModel();
 			self.histogramModel = new HistogramModel();
+			self.barcodeModel = new BarcodeModel();
 			self.barcodeCollection = new BarcodeCollection();
  		},
  		/**
