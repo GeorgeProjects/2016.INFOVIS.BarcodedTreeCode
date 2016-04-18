@@ -38,11 +38,18 @@ define([
 
 		onShow: function(){
 			var self = this;
-			self.showChildView('histogramMain',new HistogramMain({model: Datacenter.histogramModel}));
-			self.showChildView('histogramInfo',new HistogramInfo({model: Datacenter.histogramModel}));
-			var histogramPanel = new HistogramPanel();
-			self.showChildView('histogramPanel',histogramPanel);
-			histogramPanel.bind();//按钮的绑定放在初始化以及template的绑定结束后，否则无法找到按钮来绑定
+
+			var histogramMainView =  new HistogramMain({model: Datacenter.histogramModel});
+			self.showChildView('histogramMain',new HistogramMain(histogramMainView));
+			histogramMainView.default_display();
+			
+			var histogramInfoView =  new HistogramInfo({model: Datacenter.histogramModel});
+			self.showChildView('histogramInfo',histogramInfoView);
+			histogramInfoView.default_display();
+			
+			var histogramPanelView = new HistogramPanel();
+			self.showChildView('histogramPanel',histogramPanelView);
+			histogramPanelView.bind();//按钮的绑定放在初始化以及template的绑定结束后，否则无法找到按钮来绑定
 		},
 	});
 });

@@ -28,21 +28,19 @@ define([
 			var self = this;
 			var model = self.model;
 			var fileInfoData = model.fileInfoData;
-
-			var currentSelectBarIndex = Variables.get('currentSelectBarIndex');
-			self.update_inner_top_right_description(fileInfoData,currentSelectBarIndex);
 			self.listenTo(Variables,'change:currentSelectBarIndex',function(model,value){
 				self.update_inner_top_right_description(fileInfoData,value);
 			})
 		},
-
-		//新开一个函数，把初始化和开始的draw分开来，否则可能select不到！！
-
-		update_inner_top_right_description: function(data_array,compareNum){
-
-			console.log(data_array,compareNum)
-
-			var curFile = data_array[compareNum];
+		default_display: function(){
+			var self = this;
+			var model = self.model;
+			var fileInfoData = model.fileInfoData;
+			var currentSelectBarIndex = Variables.get('currentSelectBarIndex');
+			self.update_inner_top_right_description(fileInfoData,currentSelectBarIndex);
+		},
+		update_inner_top_right_description: function(data_array,bar_index){
+			var curFile = data_array[bar_index];
 			$("#histogram-info .date_description").html(function() {
 				return curFile.time;
 			});
@@ -65,5 +63,6 @@ define([
 			}
 			*/
 		}
+
 	})
 })

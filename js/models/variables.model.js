@@ -16,7 +16,8 @@ define([
             'loading':true, //whether loading page show
             'virtualNodeDescription' : 'virtual',//给virtual的结点的description的标签
             'currentSelectBarIndex' : 0,//存储最后一个被选中的bar对应的数据在文件数组中的index，即时间维的index
-            'selectBarArray' : [],
+            //'lastSelectBar' : {timeIndex : 0, shouldHighlight : true},
+            'selectBarArray' : [0],
             'histogramSortMode' : 'time',//取"time"或"value"
             'histogramValueDim' : 'sum_flowSize',//取"sum_flowSize"或"nonvirtual_sum_node"
             'fileNameArray': [  '20120121-R06-81XX.csv',

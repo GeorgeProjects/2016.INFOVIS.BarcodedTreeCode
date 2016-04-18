@@ -37,36 +37,36 @@ define([
 			style: 'width: 100%; height: 100%;',
 			id: 'histogram-main-svg'
 		},
-		event:{
-			
+		events:{
+
 		},
 		initialize: function(options){
 			var self = this;
-			/**
-			 * [he attribute in the model is the location and attribute of the rect in the histogram view
-			 * and  we handle this values in the barcode.model.js]
-			 * @type {[type]}
-			 */
-
 			var model = self.model;
 			var fileInfoData = model.fileInfoData;
-
-			var sortMode = Variables.get('histogramSortMode');//取"time"或"value"
-			var valueDim = Variables.get('histogramValueDim');//取"sum_flowSize"或"nonvirtual_sum_node"
-			self.draw_histogram(fileInfoData,sortMode,valueDim);
-
 			self.listenTo(Variables,'change:histogramSortMode change:histogramValueDim',function(model,value){
 				var sortMode = Variables.get('histogramSortMode');//取"time"或"value"
 				var valueDim = Variables.get('histogramValueDim');//取"sum_flowSize"或"nonvirtual_sum_node"
 				self.draw_histogram(fileInfoData,sortMode,valueDim);
+				self.maintain_highlight();
+			});
+			
+			self.on("UpdateHighlight",function(){
+				self.maintain_highlight();
 			})
+
+
 		},
-
-
-		//新开一个函数，把初始化和开始的draw分开来，否则可能select不到！！
-		
-		draw_histogram: function(original_data,sort_mode,value_dim)
-		{
+		default_display: function(options){
+			var self = this;
+			var model = self.model;
+			var fileInfoData = model.fileInfoData;
+			var sortMode = Variables.get('histogramSortMode');//取"time"或"value"
+			var valueDim = Variables.get('histogramValueDim');//取"sum_flowSize"或"nonvirtual_sum_node"
+			self.draw_histogram(fileInfoData,sortMode,valueDim);
+			self.maintain_highlight();
+		},
+		draw_histogram: function(original_data,sort_mode,value_dim){
 			console.log(original_data)
 			var self = this;
 			var svg = self.d3el;//此处不能直接用id选svg，因为此时这个svg实际上还没有画出来，只能用self来找
@@ -91,15 +91,15 @@ define([
 				})
 			}
 
-/*
-			var tip = d3.tip()
-						.attr('class', 'd3-tip')
-						.offset([-10, 0])
-						.html(function(d, i) {
-							console.log("hhhh");
-						});
-			svg.call(tip)			
-*/
+			/*
+				var tip = d3.tip()
+							.attr('class', 'd3-tip')
+							.offset([-10, 0])
+							.html(function(d, i) {
+								console.log("hhhh");
+							});
+				svg.call(tip)			
+			*/
 
 			var svgWidth = $("#histogram-main").width();				
 			var svgHeight = $("#histogram-main").height();				
@@ -210,27 +210,29 @@ define([
 				//tip.hide(d);
 			})
 			.on("click",function(d,i){
+				//维护全局变量
 				Variables.set("currentSelectBarIndex",d.time_index);
-				
-				d3.selectAll('#histogram-main .bar').classed("oneclick-highlight",false);
-				d3.select(this).classed("oneclick-highlight", true);
+				self.trigger("UpdateHighlight");//更新高亮
 			})
 			.on("dblclick",function(d,i){
-
-				if (d3.select(this).classed("dbclick-selected"))//如果之前已经双击高亮，双击以后解除单击高亮，解除双击高亮
+				//维护全局变量
+				var selectBarArray = Variables.get("selectBarArray");
+				var index = selectBarArray.indexOf(d.time_index);
+				if (index != -1)//以前双击选中过
 				{
-					d3.select(this).classed("oneclick-highlight",false);
-					d3.select(this).classed("dbclick-selected",false);
+					selectBarArray.splice(index,1);
 				}
-				else//如果之前没有双击高亮，双击以后增加双击高亮，
+				else
 				{
-					d3.select(this).classed("dbclick-selected",true);
+					selectBarArray.push(d.time_index);
+					selectBarArray.sort();
 				}
+				Variables.set("selectBarArray",selectBarArray);
+				self.trigger("UpdateHighlight");//更新高亮
 
 				//画barcode
 				//changeComparedData(compareNum);
 			})
-
 
 			// draw x-axis ticks
 			if (sort_mode == "time") {
@@ -246,8 +248,27 @@ define([
 					}
 				}			
 			}
-			
+		},
+		maintain_highlight: function(){//按照全局变量的标记进行高亮
+			var self = this;
+			var svg = self.d3el;
+
+			//恢复单击的高亮
+			d3.selectAll('#histogram-main .bar').classed("oneclick-highlight",false);
+			var currentSelectBarIndex = Variables.get('currentSelectBarIndex');
+			svg.selectAll("#his-"+currentSelectBarIndex).classed('oneclick-highlight',true)
+
+			//恢复双击的高亮
+			d3.selectAll('#histogram-main .bar').classed("dbclick-selected",false);
+			var selectBarArray = Variables.get('selectBarArray');
+			for (var i = 0; i < selectBarArray.length;++i)
+			{
+				svg.selectAll("#his-"+selectBarArray[i]).classed('dbclick-selected',true)
+			}
+			console.log(currentSelectBarIndex,selectBarArray)
 		}
+
+
 
 	}, SVGBase));
 });
