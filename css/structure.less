@@ -66,20 +66,21 @@ body{
     	width: @barcode-view_width;
         border: @frame-border;
 
-        #barcode-main{
-            position: absolute;
-            background-color: @test-background1;
-            height: @barcode-main_height;
-            width: @barcode-main_width;
-            border: @frame-border;
-        }
-
         #barcode-panel{
             position: absolute;
             background-color: @test-background1;
-            left:  @barcode-panel_left;
+            
             height: @barcode-panel_height;
             width: @barcode-panel_width;
+            border: @frame-border;
+        }
+
+        #barcode-main{
+            position: absolute;
+            background-color: @test-background1;
+            top: @barcode-panel_height;
+            height: @barcode-main_height;
+            width: @barcode-main_width;
             border: @frame-border;
         }
     }
