@@ -1,0 +1,54 @@
+#histogram-main{
+  .tick-label{
+    font-size: 12px;
+  }
+
+  .label-wrapper > .label  {
+    pointer-events: none;
+    cursor: not-allowed;  
+    color: white;
+  }
+
+  .bar{
+    fill : #C0C0C0;
+  }
+
+  .x-axis{
+    stroke-width : 2px;
+    path{/*x轴线*/
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+    line{/*x轴上刻度标*/
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+  }
+
+  .y-axis{
+    stroke-width : 2px;
+    path{/*y轴线*/
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+    line{/*y轴上刻度标*/
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+  }
+
+  .oneclick-highlight{/*rect[class~=oneclick-highlight]也可以*/
+    stroke: #dddd00;
+    stroke-width: 2px;
+  }
+
+  .dbclick-selected {
+    fill: #1F77B4;
+  }
+}
+
+
