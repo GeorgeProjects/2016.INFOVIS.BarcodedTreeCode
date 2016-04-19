@@ -21,14 +21,12 @@ define([
 	'jquery',
 	'backbone',
 	'd3',
-
-	//'d3-tip',
-
+	'd3Tip',
 	'datacenter',
 	'config',
 	'variables',
 	'views/svg-base.addon'
-],function(require, Mn, _, $, Backbone, d3, /*d3Tip,*/ Datacenter, Config, Variables, SVGBase){
+],function(require, Mn, _, $, Backbone, d3, d3Tip, Datacenter, Config, Variables, SVGBase){
 	'use strict';
 	return Mn.ItemView.extend(_.extend({
 		tagName: 'svg',

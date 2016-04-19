@@ -56,15 +56,6 @@ define([
 			$("#histogram-info .node_num_description").text(function() {
 				return "";
 			});
-			/*
-			for (var i = 0;i < curFile.nonvirtual_node_of_level.length;++i)
-			{
-				$("#histogram-info .L"+i+"node_num_description").text(function() {
-					var nodeNumDescription = curFile.nonvirtual_node_of_level[i];
-					return nodeNumDescription;
-				});
-			}
-			*/
 		},
 		update_info_description: function(data_array,bar_index){
 			var curFile = data_array[bar_index];
@@ -80,15 +71,6 @@ define([
 			$("#histogram-info .node_num_description").text(function() {
 				return curFile.nonvirtual_sum_node;
 			});
-			/*
-			for (var i = 0;i < curFile.nonvirtual_node_of_level.length;++i)
-			{
-				$("#histogram-info .L"+i+"node_num_description").text(function() {
-					var nodeNumDescription = curFile.nonvirtual_node_of_level[i];
-					return nodeNumDescription;
-				});
-			}
-			*/
 		}
 
 	})
