@@ -26,36 +26,42 @@ define([
 		},
 		initialize: function(options){
 			var self = this;
-			var model = self.model;
-
 		},
 		bind: function(){
 			var self = this;
+			var model = self.model;
 			$(function() {
-				$( "#selectable" ).selectable({
+				$( "#barcode-panel #selectable" ).selectable({
 					stop: function() {
 						$("#barcode-panel .ui-widget-content").removeClass("active");
-				        $( ".ui-selected", this ).each(function() {
+				        $( "#barcode-panel .ui-selected", this ).each(function() {
 				        	$(this).addClass("active");
-					        var index = $( "#selectable li" ).index( this );
+					        var index = $( "#barcode-panel #selectable li" ).index( this );
 					        console.log(index);
 				        });
 				    }
 				});
 			});
 
-			/*
-			$("#switch-button").bootstrapSwitch({
-		        onText: 'focus',
-		        offText: 'reduce',
-		        size: 'mini'
+			$( "#barcode-panel .width-item" ).each(function() {
+				$( this ).slider({
+					value: 0,
+					range: "min",
+					animate: true,
+					orientation: "horizontal"
+				});
 		    });
-		    $("#set-operation").bootstrapSwitch({
-		        onText: 'open ',
-		        offText: 'close',
-		        size: 'mini'
+
+		    $( "#barcode-panel .height-item" ).each(function() {
+				$( this ).slider({
+					value: 0,
+					range: "min",
+					animate: true,
+					orientation: "horizontal"
+				});
 		    });
-			*/
+
+
 		}
 	})
 })

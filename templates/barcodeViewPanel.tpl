@@ -10,12 +10,6 @@
 </span>
 <span id="checkbox_group">
 	<label>
-		<input type="checkbox" name="my-checkbox" id="switch-button" data-size="mini" unchecked>
-	</label>
-	<label>	
-		<input type="checkbox" name="my-checkbox" id="set-operation" data-size="mini" checked>
-	</label>
-	<label>
 		<input type="checkbox" class="highlight_control" id="highlight_sibling" unchecked>sibling
 	</label>
 	<label>
@@ -23,6 +17,25 @@
 	</label>
 </span>
 <span id="barcode_size_controller_group">
-	<div id='slider-control-width'></div>
-	<div id='slider-control-height'></div>
+	<div class="btn-group" role="group">
+	    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="slider-control-width">Width
+	    	<span class="caret"></span><!--加上小三角-->
+	    </button>
+	    <ul class="dropdown-menu" id="width-menu">
+	    	<label> L0 <span class="width-item"></span> </label>
+		    <label> L1 <span class="width-item"></span> </label>
+		    <label> L2 <span class="width-item"></span> </label>
+		    <label> L3 <span class="width-item"></span> </label>
+		    <label> L4 <span class="width-item"></span> </label>
+	    </ul>
+  	</div>
+
+  	<div class="btn-group" role="group">
+	    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="slider-control-height">Height
+	    	<span class="caret"></span><!--加上小三角-->
+	    </button>
+	    <ul class="dropdown-menu" id="height-menu">
+	    	<span class="height-item"></span>
+	    </ul>
+  	</div>
 </span>	
