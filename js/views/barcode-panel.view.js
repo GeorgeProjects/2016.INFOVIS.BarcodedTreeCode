@@ -27,9 +27,25 @@ define([
 		initialize: function(options){
 			var self = this;
 			var model = self.model;
+
 		},
 		bind: function(){
 			var self = this;
+			$(function() {
+				$( "#selectable" ).selectable({
+					stop: function() {
+						$("#barcode-panel .ui-widget-content").removeClass("active");
+				        $( ".ui-selected", this ).each(function() {
+				        	$(this).addClass("active");
+					        var index = $( "#selectable li" ).index( this );
+					        console.log(index);
+				        });
+				    }
+				});
+			});
+
+
+
 
 		}
 	})

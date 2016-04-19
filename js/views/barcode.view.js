@@ -38,10 +38,11 @@ define([
 			var self = this;
 
 			var barcodeMainView =  new BarcodeMain({model: Datacenter.barcodeModel});
-			self.showChildView('barcodeMain',new BarcodeMain(barcodeMainView));
+			self.showChildView('barcodeMain',barcodeMainView);
 			
 			var barcodePanelView = new BarcodePanel();
 			self.showChildView('barcodePanel',barcodePanelView);
+			barcodePanelView.bind();//按钮的绑定放在初始化以及template的绑定结束后，否则无法找到按钮来绑定
 		},
 	});
 });
