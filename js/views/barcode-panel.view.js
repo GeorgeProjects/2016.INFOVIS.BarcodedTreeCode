@@ -44,9 +44,18 @@ define([
 				});
 			});
 
-
-
-
+			/*
+			$("#switch-button").bootstrapSwitch({
+		        onText: 'focus',
+		        offText: 'reduce',
+		        size: 'mini'
+		    });
+		    $("#set-operation").bootstrapSwitch({
+		        onText: 'open ',
+		        offText: 'close',
+		        size: 'mini'
+		    });
+			*/
 		}
 	})
 })
