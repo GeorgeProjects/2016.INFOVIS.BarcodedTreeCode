@@ -40,7 +40,7 @@ define([
 			var self = this;
 
 			var histogramMainView =  new HistogramMain({model: Datacenter.histogramModel});
-			self.showChildView('histogramMain',new HistogramMain(histogramMainView));
+			self.showChildView('histogramMain',histogramMainView);
 			histogramMainView.default_display();
 			
 			var histogramInfoView =  new HistogramInfo({model: Datacenter.histogramModel});

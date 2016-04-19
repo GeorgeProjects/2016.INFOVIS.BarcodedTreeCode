@@ -13,7 +13,7 @@ require.config({
         'backbone.relational': ['../bower_components/backbone-relational/backbone-relational'],
         'd3': ['../bower_components/d3/d3'],
 
-        //'d3-tip': ['../bower_components/d3-tip/d3-tip'],
+        'd3Tip': ['../bower_components/d3-tip/d3-tip'],
 
         'highstock': ['../bower_components/highstock/highstock'],
 
@@ -32,7 +32,7 @@ require.config({
 
 require(['jquery', 'underscore', 'd3'], function($, _, d3) {
     'use strict';
-    require(['backbone', 'bootstrap', 'highstock'], function(Backbone, Bootstrap, BsDatapicker) {
+    require(['backbone', 'bootstrap', 'highstock', 'd3Tip'], function(Backbone, Bootstrap, BsDatapicker, d3Tip) {
         require(['app'], function (App) { // require.js shim不能与cdn同用,因此3层require,非amd module需要如此
             $(document).ready(function(){
                 var app = new App();

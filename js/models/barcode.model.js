@@ -19,15 +19,16 @@ define([
 		},
 		initialize: function(){
 			var self = this;
+		},
+		handle_location: function(){
+			var self = this;
+			
+			
 			/*
-			var fileLinearDataArray = window.Datacenter.basicDataModel.get('fileLinearDataArray');
 			var index = self.get('barcodeIndex');
 			// get the barcode location according the barcode information
 			self.set('barcodeSingleDataArray', fileLinearDataArray[index]);
 			*/
-		},
-		handle_location: function(){
-			
 		}
 	});
 })

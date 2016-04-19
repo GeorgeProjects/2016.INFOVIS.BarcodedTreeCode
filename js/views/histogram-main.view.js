@@ -21,14 +21,12 @@ define([
 	'jquery',
 	'backbone',
 	'd3',
-
-	//'d3-tip',
-
+	'd3Tip',
 	'datacenter',
 	'config',
 	'variables',
 	'views/svg-base.addon'
-],function(require, Mn, _, $, Backbone, d3, /*d3Tip,*/ Datacenter, Config, Variables, SVGBase){
+],function(require, Mn, _, $, Backbone, d3, d3Tip, Datacenter, Config, Variables, SVGBase){
 	'use strict';
 	return Mn.ItemView.extend(_.extend({
 		tagName: 'svg',
@@ -53,6 +51,7 @@ define([
 			self.on("UpdateHighlight",function(){
 				self.maintain_highlight();
 			})
+
 		},
 		default_display: function(options){
 			var self = this;
@@ -64,7 +63,6 @@ define([
 			self.maintain_highlight();
 		},
 		draw_histogram: function(original_data,sort_mode,value_dim){
-			console.log(original_data)
 			var self = this;
 			var svg = self.d3el;//此处不能直接用id选svg，因为此时这个svg实际上还没有画出来，只能用self来找
 
@@ -88,15 +86,13 @@ define([
 				})
 			}
 
-			/*
-				var tip = d3.tip()
-							.attr('class', 'd3-tip')
-							.offset([-10, 0])
-							.html(function(d, i) {
-								console.log("hhhh");
-							});
-				svg.call(tip)			
-			*/
+			var tip = d3.tip()
+				.attr('class', 'd3-tip')
+				.offset([-10, 0])
+				.html(function(d, i) {
+					return "hhh"
+				});
+			svg.call(tip);	
 
 			var svgWidth = $("#histogram-main").width();				
 			var svgHeight = $("#histogram-main").height();				
@@ -201,10 +197,10 @@ define([
 				return yScale(Math.log(d[value_dim]));
 			})
 			.on("mouseover",function(d,i){
-				//tip.show(d);
+				tip.show(d);
 			})
 			.on("mouseout",function(d,i){
-				//tip.hide(d);
+				tip.hide(d);
 			})
 			.on("click",function(d,i){
 				//维护全局变量
