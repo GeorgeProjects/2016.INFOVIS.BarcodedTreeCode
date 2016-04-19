@@ -90,7 +90,18 @@ define([
 				.attr('class', 'd3-tip')
 				.offset([-10, 0])
 				.html(function(d, i) {
-					return "hhh"
+					var time = d.time;
+					var sumFlowSize = d.sum_flowSize;
+					var sumNode = d.nonvirtual_sum_node;
+					var nonvirtualNodeOfLevel = d.nonvirtual_node_of_level;
+
+					var returnedString = "";
+					returnedString += 	"date: " + "<span style='color:red'>" + time + "</span>" + " " +
+										"sumFlowSize: " + "<span style='color:red'>" + d3.format(".3s")(sumFlowSize) + "bytes" + "</span>" + " " +
+										"sumNode: " + "<span style='color:red'>" + sumNode + "</span>" + " ";
+					for (var i = 0; i < nonvirtualNodeOfLevel.length ;++i)
+						returnedString += "L" + i + "Node: " + "<span style='color:red'>" + nonvirtualNodeOfLevel[i] + "</span>" + " ";
+					return returnedString;
 				});
 			svg.call(tip);	
 
