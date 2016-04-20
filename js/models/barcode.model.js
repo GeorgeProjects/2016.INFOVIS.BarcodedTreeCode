@@ -12,8 +12,8 @@ define([
 
 	return Backbone.Model.extend({
 		defaults: {
-			'barcodeIndex': 0, 
-			'barcodeSingleDataArray':[],
+			'barcodeIndex': 0, //这一棵tree在文件上的index
+			'barcodeSingleDataArray':[],//这一棵tree的linear tree
 			// the barLocationArray store the rect object with the attributes x, y, width, height, 
 			'barLocationArray': []
 		},
