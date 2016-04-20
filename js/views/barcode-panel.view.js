@@ -30,6 +30,22 @@ define([
 		bind: function(){
 			var self = this;
 			var model = self.model;
+
+			var sumLevel = Variables.get('sumLevel');
+			for (var i = 0; i < sumLevel;++i)//按照Variables中的sumLevel来append合适的按钮数
+			{
+				$("#barcode-panel .level_display_control").append( 
+					"<li class=\"btn btn-default btn-xs ui-widget-content\">L"+ i +"</li>"
+				);
+			}
+
+			for (var i = 0; i < sumLevel;++i)//按照Variables中的sumLevel来append合适的slider数
+			{
+				$("#barcode-panel #width-menu").append( 
+					"<div class=\"menu-item\"> L" + i + "<span class=\"width-item\"></span> </div>"
+				);
+			}
+
 			$(function() {
 				$( "#barcode-panel #selectable" ).selectable({
 					stop: function() {

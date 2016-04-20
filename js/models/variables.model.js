@@ -20,6 +20,8 @@ define([
             'lastSelectBarIndex' : 0,//存储最后一个被选中的bar对应的数据在文件数组中的index，即时间维的index
             'maintainingLastSelectBar' : true,//标记当前是否正在单击选着lastSelectBar
             'selectBarArray' : [0],//双击选中的一组bar
+
+            'sumLevel' : 5,//手动设置的总层数
             
             'histogramSortMode' : 'time',//取"time"或"value"
             'histogramValueDim' : 'sum_flowSize',//取"sum_flowSize"或"nonvirtual_sum_node"
