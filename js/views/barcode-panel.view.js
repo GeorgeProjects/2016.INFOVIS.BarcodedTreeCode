@@ -34,7 +34,7 @@ define([
 				$( "#barcode-panel #selectable" ).selectable({
 					stop: function() {
 						$("#barcode-panel .ui-widget-content").removeClass("active");
-				        $( "#barcode-panel .ui-selected", this ).each(function() {
+				        $(".ui-selected", this ).each(function() {
 				        	$(this).addClass("active");
 					        var index = $( "#barcode-panel #selectable li" ).index( this );
 					        console.log(index);
