@@ -22,11 +22,11 @@
 	    	<span class="caret"></span><!--加上小三角-->
 	    </button>
 	    <ul class="dropdown-menu" id="width-menu">
-	    	<label> L0 <span class="width-item"></span> </label>
-		    <label> L1 <span class="width-item"></span> </label>
-		    <label> L2 <span class="width-item"></span> </label>
-		    <label> L3 <span class="width-item"></span> </label>
-		    <label> L4 <span class="width-item"></span> </label>
+	    	<div class="menu-item"> L0 <span class="width-item"></span> </div>
+		    <div class="menu-item"> L1 <span class="width-item"></span> </div>
+		    <div class="menu-item"> L2 <span class="width-item"></span> </div>
+		    <div class="menu-item"> L3 <span class="width-item"></span> </div>
+		    <div class="menu-item"> L4 <span class="width-item"></span> </div>
 	    </ul>
   	</div>
 
