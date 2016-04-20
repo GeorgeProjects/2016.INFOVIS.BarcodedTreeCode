@@ -27,7 +27,7 @@ define([
 		initialize: function(options){
 			var self = this;
 			var model = self.model;
-			var fileInfoData = model.fileInfoData;
+			var fileInfoData = model.get('fileInfoData');
 			self.listenTo(Variables,'change:lastSelectBarIndex change:maintainingLastSelectBar',function(model,value){
 				if (Variables.get("maintainingLastSelectBar") == true)
 					self.update_info_description(fileInfoData,Variables.get("lastSelectBarIndex"));
@@ -38,7 +38,7 @@ define([
 		default_display: function(){
 			var self = this;
 			var model = self.model;
-			var fileInfoData = model.fileInfoData;
+			var fileInfoData = model.get('fileInfoData');
 			var selectBarArray = Variables.get('selectBarArray');
 			var lastSelectBarIndex = Variables.get('lastSelectBarIndex');
 			self.update_info_description(fileInfoData,lastSelectBarIndex);

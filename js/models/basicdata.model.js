@@ -11,7 +11,7 @@ define([
 	'use strict';
 
 	return Backbone.Model.extend({
-		default: {
+		defaults: {
 			'fileCSVDataArray': [],
 			'fileLinearDataArray': []
 		},
@@ -58,9 +58,7 @@ define([
 			self.reorder_tree(root);
 			self.cal_all_pattern_marking(root,true);
 			self.cal_routes(root);
-
-			//self.reorder_tree(root);
-
+			
 			var resultArray = self.linearlize(root);
 			return resultArray;
 		},

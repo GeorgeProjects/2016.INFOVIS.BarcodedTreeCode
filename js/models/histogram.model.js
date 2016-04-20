@@ -19,7 +19,7 @@ define([
 
 	return Backbone.Model.extend({
 		defaults: {
-			histogramAttr:[]
+			'fileInfoData':[]
 		},
 		initialize: function(){
 			var self = this;
@@ -28,10 +28,6 @@ define([
 			var self = this;
 			self.basicDataModel = window.Datacenter.basicDataModel;
 			var fileLinearDataArray = self.basicDataModel.get('fileLinearDataArray');
-			self.basicDataModel.set('fileLinearDataArray',fileLinearDataArray);
-			//iterate the array to get the histogram information we needed when draw the histogram 
-			//store into the histogramAttr
-			//console.log(fileLinearDataArray);
 
 			var fileNameArray = Variables.get('fileNameArray');
 			if (fileNameArray.length != fileLinearDataArray.length)
@@ -45,21 +41,22 @@ define([
 			//4. 总流量 .sum_flowSize
 			//5. 时间序号 .time_index
 			//6. 年月日 .time
-			self.fileInfoData = [];//model中真正要给view用的内容
+			//fileInfoData = [];//model中真正要给view用的内容
+			var fileInfoData = self.get('fileInfoData');
 			for (var i = 0;i < fileLinearDataArray.length;++i)
 			{
 				var curLinearTree = fileLinearDataArray[i];
 				var curRoot = curLinearTree[0];
-				self.fileInfoData[i] = {};
-				self.fileInfoData[i].sum_flowSize = curRoot.trees_values[i];//要求建树时curtree_index与文件的下标对应
-				self.fileInfoData[i].file_name = fileNameArray[i];
-				self.fileInfoData[i].nonvirtual_node_of_level = _cal_nonvirtual_node_of_level(curRoot);
-				self.fileInfoData[i].nonvirtual_sum_node = 0;
-				self.fileInfoData[i].time_index = i;
-				self.fileInfoData[i].time = fileNameArray[i].substring(0,fileNameArray[i].indexOf('-'));
-				for (var j = 0;j < self.fileInfoData[i].nonvirtual_node_of_level.length;++j)
+				fileInfoData[i] = {};
+				fileInfoData[i].sum_flowSize = curRoot.trees_values[i];//要求建树时curtree_index与文件的下标对应
+				fileInfoData[i].file_name = fileNameArray[i];
+				fileInfoData[i].nonvirtual_node_of_level = _cal_nonvirtual_node_of_level(curRoot);
+				fileInfoData[i].nonvirtual_sum_node = 0;
+				fileInfoData[i].time_index = i;
+				fileInfoData[i].time = fileNameArray[i].substring(0,fileNameArray[i].indexOf('-'));
+				for (var j = 0;j < fileInfoData[i].nonvirtual_node_of_level.length;++j)
 				{
-					self.fileInfoData[i].nonvirtual_sum_node += self.fileInfoData[i].nonvirtual_node_of_level[j];
+					fileInfoData[i].nonvirtual_sum_node += fileInfoData[i].nonvirtual_node_of_level[j];
 				}
 
 				//不对root对应的树结构有任何假设，计算这棵树各层的结点数（排除虚拟结点），返回这个数组

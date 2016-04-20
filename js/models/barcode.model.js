@@ -12,10 +12,10 @@ define([
 
 	return Backbone.Model.extend({
 		defaults: {
-			barcodeIndex: 0, 
-			barcodeSingleDataArray:null,
+			'barcodeIndex': 0, 
+			'barcodeSingleDataArray':[],
 			// the barLocationArray store the rect object with the attributes x, y, width, height, 
-			barLocationArray: null
+			'barLocationArray': []
 		},
 		initialize: function(){
 			var self = this;

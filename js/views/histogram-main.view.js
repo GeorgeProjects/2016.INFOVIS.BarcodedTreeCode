@@ -41,7 +41,7 @@ define([
 		initialize: function(options){
 			var self = this;
 			var model = self.model;
-			var fileInfoData = model.fileInfoData;
+			var fileInfoData = model.get('fileInfoData');
 			self.listenTo(Variables,'change:histogramSortMode change:histogramValueDim',function(model,value){
 				var sortMode = Variables.get('histogramSortMode');//取"time"或"value"
 				var valueDim = Variables.get('histogramValueDim');//取"sum_flowSize"或"nonvirtual_sum_node"
@@ -56,7 +56,7 @@ define([
 		default_display: function(options){
 			var self = this;
 			var model = self.model;
-			var fileInfoData = model.fileInfoData;
+			var fileInfoData = model.get('fileInfoData');
 			var sortMode = Variables.get('histogramSortMode');//取"time"或"value"
 			var valueDim = Variables.get('histogramValueDim');//取"sum_flowSize"或"nonvirtual_sum_node"
 			self.draw_histogram(fileInfoData,sortMode,valueDim);
