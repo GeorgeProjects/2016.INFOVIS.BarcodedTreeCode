@@ -26,8 +26,7 @@ define([
 		},
 		handle_histogram_attr: function(){
 			var self = this;
-			self.basicDataModel = window.Datacenter.basicDataModel;
-			var fileLinearDataArray = self.basicDataModel.get('fileLinearDataArray');
+			var fileLinearDataArray = window.Datacenter.basicDataModel.get('fileLinearDataArray');
 
 			var fileNameArray = Variables.get('fileNameArray');
 			if (fileNameArray.length != fileLinearDataArray.length)
