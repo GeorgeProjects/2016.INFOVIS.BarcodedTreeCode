@@ -81,8 +81,10 @@ define([
  			var barcodeList = new Array();
  			for(var i = 0; i < fileLinearDataArray.length;i++){
  				var barcodeModel = new BarcodeModel({barcodeIndex: i});
- 				barcodeList.push(barcodeModel);
+ 				//barcodeList.push(barcodeModel);
+ 				self.barcodeCollection.push(barcodeModel)
  			}
+ 			console.log(self.barcodeCollection)
  		}
 	}))();
 });

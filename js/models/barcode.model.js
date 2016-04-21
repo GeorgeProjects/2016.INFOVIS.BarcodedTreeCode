@@ -19,6 +19,7 @@ define([
 		},
 		initialize: function(){
 			var self = this;
+	//		Variables.get('fileLinearDataArray')
 		},
 		handle_location: function(){
 			var self = this;
