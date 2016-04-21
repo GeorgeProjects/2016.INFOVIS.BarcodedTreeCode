@@ -8,8 +8,9 @@ define([
 	'datacenter',
 	'config',
 	'variables',
+	'text!collections/barcode.collection.js',
 	'text!templates/barcodeViewPanel.tpl'
-], function(require, Mn, _, $, Backbone, d3, Datacenter, Config, Variables, Tpl){
+], function(require, Mn, _, $, Backbone, d3, Datacenter, Config, Variables, Barcodecollection, Tpl){
 	'use strict';
 	return Mn.LayoutView.extend({
 		tagName: 'div',
@@ -37,7 +38,23 @@ define([
 				$("#barcode-panel .level_display_control").append( 
 					"<li class=\"btn btn-default btn-xs ui-widget-content\">L"+ i +"</li>"
 				);
+
+				self.$el.find("#state-change").click(function() {
+
+					if ($(this).hasClass("active"))
+					{
+						$(this).removeClass("active");
+						Barcodecollection.get('compressBarcodeMode') = false;
+					}
+					else
+					{
+						$(this).addClass("active");
+						Barcodecollection.get('compressBarcodeMode') = true;
+					}
+				});
 			}
+
+			
 
 			for (var i = 0; i < sumLevel;++i)//按照Variables中的sumLevel来append合适的slider数
 			{
