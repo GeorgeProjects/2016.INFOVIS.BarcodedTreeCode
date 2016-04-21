@@ -7,39 +7,44 @@
 		float:left;
 		left: 0px;
 		width: @barcode-panel-depth-change-width;
-		padding-left: @1_2standard-button-width;
-		padding-right: @1_2standard-button-width;
-		margin-left: @padding-div;
 		margin-right: @padding-div;
+		text-align: center;
 		#state-change{
 			position: relative;
+			top: 50%;
+  			transform: translateY(-50%);
 		}
 
 		#selectable{
 			position: relative;
-			left: @1_2standard-button-width;
-
 			.ui-selectee {
+				position: relative;
 				background: white; 
+				top: 50%;
+  				transform: translateY(-50%);
 				width: 25px;
 			}
 		}
 	}
 	//------------------------------
 	#node-select{
-		float: left;
-		height: 100%;
+		float:left;
 		left: @barcode-panel-node-select-left;
 		width: @barcode-panel-node-select-width;
 		margin-left: @padding-div;
 		margin-right: @padding-div;
-		padding-left:  @standard-button-width;
-		padding-right: @1_2standard-button-width;
 		background-color: @barcode-panel-color;
+		height: 100%;
+		text-align: center;
 		#checkbox_group{
 			position: relative;
+			width: 100%;
 			height: 100%;
-			width: 15%;
+  			.highlight_control{
+  				width: 40%;
+  				top: 50%;
+  				transform: translateY(20%);
+  			}
 		}
 	}
 	//------------------------------
@@ -50,16 +55,14 @@
 		width: @barcode-panel-wh-controller-width;
 		margin-left: @padding-div;
 		margin-right: @padding-div;
-		padding-left: @standard-button-width;
-		padding-right: @1_2standard-button-width;
 		background-color: @barcode-panel-color;
-		#barcode_size_controller_group{
-			position: relative;
-			height: 100%;
-			width: 15%;
+		text-align: center;
 
+		.btn-group{
+			top: 50%;
+  			transform: translateY(-50%);
 			#width-menu {
-				position: absolute; 
+				position: relative; 
 				width: 160px; 
 				opacity:0.6;
 				.menu-item-text{
@@ -67,7 +70,6 @@
 					text-align: center;
 					vertical-align: middle;
 				}
-
 				.menu-item{
 					vertical-align: middle;
 					height:30px;
@@ -81,12 +83,14 @@
 					}
 				}
 			}
-
+		}
+		.btn-group{
+			top: 50%;
+  			transform: translateY(-50%);
 			#height-menu { 
-				position: absolute; 
+				position: relative; 
 				width: 110px; 
 				opacity:0.6;
-
 				.height-item {
 					width:110px; 
 				    float:left;
@@ -94,7 +98,7 @@
 				    margin-top:10px;
 				    margin-bottom: 10px;
 				}
-			}	
+			}
 		}
 	}
 }
