@@ -75,6 +75,18 @@ define([
 				});
 			});
 
+
+			self.$el.find("#highlight_cousin").click(function() {
+				console.log('1111111111111')
+			});
+
+			self.$el.find("#highlight_sibling").click(function() {
+				console.log('22222')
+			});
+
+
+			
+
 			$( "#barcode-panel .width-item" ).each(function() {
 				$( this ).slider({
 					value: 0,
