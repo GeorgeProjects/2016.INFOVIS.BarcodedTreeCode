@@ -1,12 +1,12 @@
-<span id = 'depth-change'>
+<div id = 'depth-change'>
 	<span class="btn btn-default btn-xs" id="state-change">  
 	  	<span class="glyphicon glyphicon-transfer"></span>
 	</span>
 	<span class="level_display_control" id="selectable">
 		<!-- 此处会在barcode-panel.view中按照Variables中的sumLevel来append合适的按钮数 -->
 	</span>
-</span>
-<span id='node-select'>
+</div>
+<div id='node-select'>
 	<span id="checkbox_group">
 		<label>
 			<input type="checkbox" class="highlight_control" id="highlight_sibling" unchecked>sibling
@@ -15,8 +15,8 @@
 			<input type="checkbox" class="highlight_control" id="highlight_cousin" unchecked>cousin
 		</label>
 	</span>
-</span>
-<span id="width-height-controller">
+</div>
+<div id="width-height-controller">
 	<span id="barcode_size_controller_group">
 		<div class="btn-group" role="group">
 		    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="slider-control-width">Width
@@ -36,4 +36,4 @@
 		    </ul>
 	  	</div>
 	</span>	
-<span>s
+<div>

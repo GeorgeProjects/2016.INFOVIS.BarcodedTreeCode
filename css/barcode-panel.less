@@ -1,39 +1,62 @@
 #barcode-panel{
+	background-color: white;
+	display: inline;
 	#depth-change{
-		padding-left: 10px;
+		background-color: @barcode-panel-color;
+		height: 100%;
+		float:left;
+		left: 0px;
+		width: @barcode-panel-depth-change-width;
+		padding-left: @1_2standard-button-width;
+		padding-right: @1_2standard-button-width;
+		margin-left: @padding-div;
+		margin-right: @padding-div;
 		#state-change{
 			position: relative;
 		}
 
 		#selectable{
 			position: relative;
-			list-style-type: none; 
-			margin: 0px; 
-			padding: 0px; 
-			left: 10px;
+			left: @1_2standard-button-width;
 
-			.ui-selectee { 
+			.ui-selectee {
 				background: white; 
 				width: 25px;
 			}
 		}
 	}
+	//------------------------------
 	#node-select{
-		padding-left: 10px;
+		float: left;
+		height: 100%;
+		left: @barcode-panel-node-select-left;
+		width: @barcode-panel-node-select-width;
+		margin-left: @padding-div;
+		margin-right: @padding-div;
+		padding-left:  @standard-button-width;
+		padding-right: @1_2standard-button-width;
+		background-color: @barcode-panel-color;
 		#checkbox_group{
 			position: relative;
 			height: 100%;
 			width: 15%;
-			left: 25px;
 		}
 	}
+	//------------------------------
 	#width-height-controller{
-		padding-left: 10px;
+		float: left;
+		height: 100%;
+		left: @barcode-panel-wh-controller-left;
+		width: @barcode-panel-wh-controller-width;
+		margin-left: @padding-div;
+		margin-right: @padding-div;
+		padding-left: @standard-button-width;
+		padding-right: @1_2standard-button-width;
+		background-color: @barcode-panel-color;
 		#barcode_size_controller_group{
 			position: relative;
 			height: 100%;
 			width: 15%;
-			left: 35px;
 
 			#width-menu {
 				position: absolute; 
