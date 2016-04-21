@@ -85,14 +85,17 @@ define([
 			});
 
 
-			
-
 			$( "#barcode-panel .width-item" ).each(function() {
 				$( this ).slider({
 					value: 0,
 					range: "min",
+					min: 0,
+      				max: 100,
 					animate: true,
-					orientation: "horizontal"
+					orientation: "horizontal",
+					slide: function( event, ui ) {
+						console.log(ui.value);
+				    }
 				});
 		    });
 
@@ -100,8 +103,13 @@ define([
 				$( this ).slider({
 					value: 0,
 					range: "min",
+					min: 0,
+      				max: 100,
 					animate: true,
-					orientation: "horizontal"
+					orientation: "horizontal",
+					slide: function( event, ui ) {
+						console.log(ui.value);
+				    }
 				});
 		    });
 
