@@ -36,7 +36,7 @@ define([
 			for (var i = 0; i < sumLevel;++i)//按照Variables中的sumLevel来append合适的按钮数
 			{
 				$("#barcode-panel .level_display_control").append( 
-					"<li class=\"btn btn-default btn-xs ui-widget-content\">L"+ i +"</li>"
+					"<span class=\"btn btn-default btn-xs active level-btn\" level=0>" + i + "</span>"
 				);
 
 				self.$el.find("#state-change").click(function() {
@@ -59,7 +59,7 @@ define([
 			for (var i = 0; i < sumLevel;++i)//按照Variables中的sumLevel来append合适的slider数
 			{
 				$("#barcode-panel #width-menu").append( 
-					"<div class=\"menu-item\"> L" + i + "<span class=\"width-item\"></span> </div>"
+					"<div class=\"menu-item\"><span class=\"menu-item-text\"> L" + i + "</span>" + "<span class=\"width-item\"></span> </div>"
 				);
 			}
 

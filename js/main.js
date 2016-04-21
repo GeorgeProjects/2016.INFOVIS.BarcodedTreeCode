@@ -25,13 +25,14 @@ require.config({
         'datacenter': 'models/datacenter.model',
         'config': 'models/config.model',
         'variables': 'models/variables.model',
+        'barcodeCollection':'collections/barcode.collection'
     }
 });
 
 //在外面的require的内容加在完以后，才会加载内部的require中的内容
 require(['jquery', 'underscore', 'd3'], function($, _, d3) {
     'use strict';
-    require(['backbone', 'bootstrap', 'highstock', 'd3Tip'], function(Backbone, Bootstrap, BsDatapicker, d3Tip) {
+    require(['backbone', 'bootstrap', 'highstock', 'd3Tip'], function(Backbone, Bootstrap, BsDatapicker, d3Tip, barcodeCollection) {
         require(['app'], function (App) { // require.js shim不能与cdn同用,因此3层require,非amd module需要如此
             $(document).ready(function(){
                 var app = new App();

@@ -9,24 +9,24 @@
 @test-background3: white;
 
 @app_height:calc(~'100% - 40px');
-@histogram-view_height: 20%;
+@histogram-view_height: 113px;
 @histogram-view_width: 100%;
 
 @his-main_height: 100%;
-@his-main_width: 87%;
+@his-main_width: 90%;
 @his-panel_height: 100%;
-@his-panel_width: 3%;
+@his-panel_width: 26px;
 @his-panel_left: @his-main_width;
 @his-info_height: 100%;
-@his-info_width: 10%;
-@his-info_left: @his-panel_left + @his-panel_width;
+@his-info_left: calc(~'90% + 26px');
+@his-info_width: calc(~'100% - 90% - 26px');
 
-@barcode-view_height: 80%;
+@barcode-view_height: calc(~'100% - 113px');
 @barcode-view_width:100%;
 
-@barcode-panel_height: 5%;
+@barcode-panel_height: 26px;
 @barcode-panel_width: 100%;
-@barcode-main_height: 95%;
+@barcode-main_height: calc(~'100% - 26px');
 @barcode-main_width: 100%;
 
 @frame-border: 1px solid #a0a0a0;/*三个view公用的border样式*/
