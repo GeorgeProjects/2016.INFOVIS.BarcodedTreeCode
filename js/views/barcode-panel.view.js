@@ -8,9 +8,9 @@ define([
 	'datacenter',
 	'config',
 	'variables',
-	'text!collections/barcode.collection.js',
+	//'2016.INFOVIS.BarcodedTreeCode/js/collections/barcode.collection.js',
 	'text!templates/barcodeViewPanel.tpl'
-], function(require, Mn, _, $, Backbone, d3, Datacenter, Config, Variables, Barcodecollection, Tpl){
+], function(require, Mn, _, $, Backbone, d3, Datacenter, Config, Variables, /*Barcodecollection,*/ Tpl){
 	'use strict';
 	return Mn.LayoutView.extend({
 		tagName: 'div',
@@ -44,17 +44,17 @@ define([
 					if ($(this).hasClass("active"))
 					{
 						$(this).removeClass("active");
-						Barcodecollection.get('compressBarcodeMode') = false;
+						//Barcodecollection.set('compressBarcodeMode',false);
 					}
 					else
 					{
 						$(this).addClass("active");
-						Barcodecollection.get('compressBarcodeMode') = true;
+						//Barcodecollection.set('compressBarcodeMode',true);
 					}
 				});
 			}
 
-			
+
 
 			for (var i = 0; i < sumLevel;++i)//按照Variables中的sumLevel来append合适的slider数
 			{
