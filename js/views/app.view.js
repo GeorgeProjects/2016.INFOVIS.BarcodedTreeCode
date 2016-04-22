@@ -55,6 +55,38 @@ define([
             var self = this;
             self.showChildView('histogramView', new HistogramView());
             self.showChildView('barcodeView', new BarcodeView());
+
+            $(function() {
+                $( "#histogram-view" ).resizable({
+                    autoHide: true,
+                    handles: 's',
+                    stop: function(event,ui){
+                        var deltaHeight = ui.size.height - ui.originalSize.height;
+
+                        var barcodeViewOriginalHeight = $( "#barcode-view" ).height();
+                        $( "#barcode-view" ).height(barcodeViewOriginalHeight - deltaHeight);
+
+                        var barcodeViewTop = $( "#barcode-view").offset().top;
+                        $( "#barcode-view").offset({top: (barcodeViewTop+deltaHeight)});
+                    }
+                });
+            });
+
+            $(function() {
+                $( "#barcode-view" ).resizable({
+                    autoHide: true,
+                    handles: 'n',
+                    stop: function(event,ui){
+
+                        var deltaHeight = ui.size.height - ui.originalSize.height;
+
+                        var histogramViewOriginalHeight = $( "#histogram-view" ).height();
+                        console.log(histogramViewOriginalHeight,deltaHeight)
+                        $( "#histogram-view" ).height(histogramViewOriginalHeight - deltaHeight);
+
+                    }
+                });
+            });
         }
     });
 });
