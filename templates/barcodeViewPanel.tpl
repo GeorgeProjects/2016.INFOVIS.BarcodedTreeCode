@@ -2,7 +2,7 @@
 	<span class="btn btn-default btn-xs" id="state-change">  
 	  	<span class="glyphicon glyphicon-transfer"></span>
 	</span>
-	<span class="level_display_control" id="selectable">
+	<span class="level_display_control" id="selectable" role="group">
 		<!-- 此处会在barcode-panel.view中按照Variables中的sumLevel来append合适的按钮数 -->
 	</span>
 </div>

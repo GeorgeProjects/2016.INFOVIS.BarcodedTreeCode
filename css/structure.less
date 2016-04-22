@@ -28,32 +28,29 @@ body{
     height: @app_height;
     #histogram-view{
     	position: absolute;
-    	height: @histogram-view_height;
-    	width: @histogram-view_width;
+    	height: 20%;
+    	width: 100%;
 
-    	#histogram-main{
+        #histogram-left{
             position: absolute;
-    		height: @his-main_height;
-    		width: @his-main_width;
-            border: @frame-border;
-    	}
-
-        #histogram-panel{
-            position: absolute;
-            left:  @his-panel_left;
-            height: @his-panel_height;
-            width: @his-panel_width;
-            border: @frame-border;
+            height: 100%;
+            width: 90%;
+            #histogram-panel{
+                height: @his-panel_height;
+                width: @his-panel_width;
+            }
+            #histogram-main{
+                height: @his-main_height;
+                width: 100%;
+            }
         }
-
     	#histogram-info{
             position: absolute;
-            left:  @his-info_left;
-    		height: @his-info_height;
-    		width: @his-info_width;
+            left: 90%;
+    		height: 100%;
+    		width: 10%;
             border: @frame-border;
     	}
-
     }
     #barcode-view{
     	position: absolute;

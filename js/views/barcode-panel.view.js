@@ -38,7 +38,7 @@ define([
 			for (var i = 0; i < sumLevel;++i)//按照Variables中的sumLevel来append合适的按钮数
 			{
 				$("#barcode-panel .level_display_control").append( 
-					"<span class=\"btn btn-default btn-xs active ui-widget-content level-btn\" level=" + i + ">" + i + "</span>"
+					"<span class=\"btn btn-default btn-xs active ui-widget-content level-btn\" level=" + i + ">L" + i + "</span>"
 				);
 			}
 

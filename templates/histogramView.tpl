@@ -1,6 +1,4 @@
-<div id = 'histogram-main'>
+<div id = 'histogram-left'>
 </div>
 <div id = 'histogram-info'>
-</div>
-<div id = 'histogram-panel'>
 </div>
