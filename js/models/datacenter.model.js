@@ -83,7 +83,7 @@ define([
  				var barcodeModel = new BarcodeModel({barcodeIndex: i, barcodeSingleDataArray: fileLinearDataArray[i]});
  				self.barcodeCollection.push(barcodeModel)
  			}
- 			console.log(self.barcodeCollection)
+ 			self.barcodeCollection.preprocess();
  		}
 	}))();
 });

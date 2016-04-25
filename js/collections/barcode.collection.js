@@ -14,7 +14,11 @@ define([
 		model: BarcodeModel,
 		initialize: function(){
 			var self = this;
-			
+			console.log(self);
 		},
+		preprocess: function(){
+			var self = this;
+			console.log(self)
+		}
 	});
 })

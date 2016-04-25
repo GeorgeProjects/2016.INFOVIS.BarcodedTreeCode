@@ -42,10 +42,45 @@ define([
 		initialize: function(options){
 			var self = this;
 			var model = self.model;
-			console.log(BarcodeCollection)
+			var barcodeCollection = window.Datacenter.barcodeCollection;
 		},
-		draw: function(){
-			console.log(BarcodeCollection)
+		draw_barcode: function(){
+			var barcodeCollection = window.Datacenter.barcodeCollection;
+
+			var self = this;
+			var svg = self.d3el;//此处不能直接用id选svg，因为此时这个svg实际上还没有画出来，只能用self来找
+			console.log(svg)
+
+			var radialTip = d3.tip()
+			  	.attr('class', 'd3-tip')
+			 	.offset([-10, 0])
+			  	.html(function(d) {
+			    	return 	"Name:<span style='color:red'>" + d.name +"</span>" +
+			    			"Value:<span style='color:red'>" + /*d3.format(".3s")(d.trees_values[...]) +*/ "bytes" +"</span>" +
+			    			"Depth:<span style='color:red'>" + d._depth + "</span>" +
+			    		 	"Index:<span style='color:red'>" + d.linear_index + "</span>" +
+			    		 	"Same pattern number:<span style='color:red'>" + d.maximum_continuous_repeat_group_size + "</span>"
+			    		 	;
+			  	});
+			svg.call(radialTip);
+
+			var patternTip = d3.tip()
+		  	.attr('class', 'd3-tip')
+		 	.offset([-10, 0])
+		  	.html(function(d) {
+		    	return "Name:<span style='color:red'>" + "</span>" +
+		    		 "Description:<span style='color:red'>" + "</span>" +
+		    		 "Index:<span style='color:red'>" + "</span>";
+		  	});
+			svg.call(patternTip);
+
+
+
+
+
+
+
+			
 		}
 
 	}, SVGBase));
