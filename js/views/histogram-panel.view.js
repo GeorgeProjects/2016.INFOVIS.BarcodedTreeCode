@@ -59,7 +59,7 @@ define([
 			({
 				width:"900",
 				height:"600",
-		        //modal: true,             // 创建模式对话框
+		        modal: false,             // 创建模式对话框
 		        autoOpen: false,         // 只初始化，不显示
 		        buttons: {
 			        "Back": function() {

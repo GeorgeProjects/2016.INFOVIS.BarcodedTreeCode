@@ -15,17 +15,31 @@ define([
             'finishInit':false,
             'loading':true, //whether loading page show
 
+            //histogram和barcode都需要的变量
             'virtualNodeDescription' : 'virtual',//给virtual的结点的description的标签
             
             'lastSelectBarIndex' : 0,//存储最后一个被选中的bar对应的数据在文件数组中的index，即时间维的index
             'maintainingLastSelectBar' : true,//标记当前是否正在单击选着lastSelectBar
             'selectBarArray' : [0],//双击选中的一组bar
 
+            //barcode需要的变量
             'sumLevel' : 5,//手动设置的总层数
+
+            'compressBarcodeMode':false,//标记当前处在barcode的完全展开或者压缩状态
+            'displayedLevel':[],//当前应该被展示的层级的集合
+            'highlightSibling':false,//标记mouseover时是否highlightsibling
+            'highlightCousin':false,//标记mouseover时是否highlightcousin
+            'minWidth':1,//设置bar允许的最小宽度
+            'maxWidth':30,//设置bar允许的最大宽度
+            'barWidthOfLevel':[30,20,10,5,2],//标记各层的bar的宽度
+            'minHeight':1,//设置bar允许的最小高度
+            'maxHeight':100,//设置bar允许的最大高度
+            'barHeight':20,//标记所有bar的高度
             
+            //histogram需要的变量
             'histogramSortMode' : 'time',//取"time"或"value"
             'histogramValueDim' : 'sum_flowSize',//取"sum_flowSize"或"nonvirtual_sum_node"
-            
+
             'fileNameArray': [  '20120121-R06-81XX.csv',
                                 '20120121-R07-75XX.csv',
                                 '20120121-R07-77XX.csv',
