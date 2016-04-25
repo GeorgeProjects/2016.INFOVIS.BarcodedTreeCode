@@ -39,8 +39,8 @@ define([
             //histogram需要的变量
             'histogramSortMode' : 'time',//取"time"或"value"
             'histogramValueDim' : 'sum_flowSize',//取"sum_flowSize"或"nonvirtual_sum_node"
-
-            'fileNameArray': [  '20120121-R06-81XX.csv',
+            
+            'fileNameArray':   ['20120121-R06-81XX.csv',
                                 '20120121-R07-75XX.csv',
                                 '20120121-R07-77XX.csv',
                                 '20120121-R08-76XX.csv',

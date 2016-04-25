@@ -72,6 +72,16 @@ body{
             height: @barcode-main_height;
             width: @barcode-main_width;
             border: @frame-border;
+            #barcode-main-view{
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                .barcode-single-div{
+                    position: absolute;
+                    height: 50px;
+                    width: 100%;
+                }
+            }
         }
     }
 }

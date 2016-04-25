@@ -41,7 +41,6 @@ define([
 			
 			var histogramLeftView = new HistogramLeft();
 			self.showChildView('histogramLeft', histogramLeftView);
-			//histogramLeftView.default_display();
 
 			var histogramInfoView =  new HistogramInfo({model: Datacenter.histogramModel});
 			self.showChildView('histogramInfo',histogramInfoView);

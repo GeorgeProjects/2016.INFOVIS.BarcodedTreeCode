@@ -51,7 +51,6 @@ define([
 			self.on("UpdateHighlight",function(){
 				self.maintain_highlight();
 			})
-
 		},
 		default_display: function(options){
 			var self = this;

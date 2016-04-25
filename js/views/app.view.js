@@ -62,6 +62,7 @@ define([
                     autoHide: true,
                     handles: 's',
                     stop: function(event,ui){
+                        //TODO re-rendering
                         var deltaHeight = ui.size.height - ui.originalSize.height;
                         var barcodeViewOriginalHeight = $( "#barcode-view" ).height();
                         $( "#barcode-view" ).height(barcodeViewOriginalHeight - deltaHeight);
