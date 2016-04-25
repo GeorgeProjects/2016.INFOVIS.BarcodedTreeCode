@@ -14,9 +14,10 @@ define([
 		model: BarcodeModel,
 		initialize: function(){
 			var self = this;
-			console.log(self);
+			//console.log(self);
 		},
-		preprocess: function(){
+		preprocess: function(){//负责计算collection中每个model的barLocationArray[]
+			//已经有了每个collection中每个model的barcodeIndex,barcodeSingleDataArray[]，需要计算对应的barLocationArray[]
 			var self = this;
 			console.log(self)
 		}
