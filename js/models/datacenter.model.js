@@ -80,8 +80,7 @@ define([
  			var fileLinearDataArray = self.basicDataModel.get('fileLinearDataArray');
  			var barcodeList = new Array();
  			for(var i = 0; i < fileLinearDataArray.length;i++){
- 				var barcodeModel = new BarcodeModel({barcodeIndex: i});
- 				//barcodeList.push(barcodeModel);
+ 				var barcodeModel = new BarcodeModel({barcodeIndex: i, barcodeSingleDataArray: fileLinearDataArray[i]});
  				self.barcodeCollection.push(barcodeModel)
  			}
  			console.log(self.barcodeCollection)

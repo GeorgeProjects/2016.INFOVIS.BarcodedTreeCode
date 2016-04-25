@@ -25,8 +25,9 @@ define([
 	'datacenter',
 	'config',
 	'variables',
+	'collections/barcode.collection',
 	'views/svg-base.addon'
-],function(require, Mn, _, $, Backbone, d3, d3Tip, Datacenter, Config, Variables, SVGBase){
+],function(require, Mn, _, $, Backbone, d3, d3Tip, Datacenter, Config, Variables, BarcodeCollection, SVGBase){
 	'use strict';
 	return Mn.ItemView.extend(_.extend({
 		tagName: 'svg',
@@ -41,7 +42,11 @@ define([
 		initialize: function(options){
 			var self = this;
 			var model = self.model;
+			console.log(BarcodeCollection)
 		},
+		draw: function(){
+			console.log(BarcodeCollection)
+		}
 
 	}, SVGBase));
 });
