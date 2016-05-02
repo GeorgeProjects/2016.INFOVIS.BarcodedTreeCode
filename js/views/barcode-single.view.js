@@ -49,8 +49,10 @@ define([
 		initialize: function(options){
 			var self = this;
 			var model = self.model;
+
+			console.log(model)
 		},
-		draw_single_barcode: function(){
+		draw_single_barcode: function(linear_tree, index, real_tree_index, originNodeArray){
 			var self = this;
 			var svg = self.d3el;//此处不能直接用id选svg，因为此时这个svg实际上还没有画出来，只能用self来找
 			svg.append("rect")
@@ -60,19 +62,25 @@ define([
 			.attr("width",30)
 			.attr("fill","red");
 
-
 			//linear_tree是unionLinearTree;
 			//originNodeArray是get_origin_attr(index);	
 			//draw_barcoded_tree(linear_tree, index, real_tree_index, originNodeArray);
-/*
-			var svg = d3.select('#' + svg_id); 
+			/*
+			var originIndexX = 10;
+			var indexWidth = 20;
+			var indexBiasyX = 10;
+			var originXCompute = originIndexX + indexWidth + indexBiasyX;
+
+		
+			//var svg = d3.select('#' + svg_id); 
+			
 			var originNodeArray = origin_node_array;
-			draw_index(real_tree_index,cur_tree_index);
-			repeat2Array = [];
-			xCompute = originXCompute;//用于累积当前方块的横坐标
-			var acc_depth_node_num=[];//记录各个深度的结点数
-			for (var i=0;i<=4;++i){
-				acc_depth_node_num[i]=0;
+			//self.draw_index_box(real_tree_index,cur_tree_index);
+			var repeat2Array = [];//repeat2Array = [];
+			var xCompute = originXCompute;//用于累积当前方块的横坐标
+			var acc_depth_node_num = [];//记录各个深度的结点数
+			for (var i = 0;i <= 4;++i){
+				acc_depth_node_num[i] = 0;
 			}
 			//先画条码
 			for (var i=0;i<linear_tree.length;++i)//对于线性化的并集树中每个元素循环
@@ -176,10 +184,105 @@ define([
 				clickHandlerOrigin(d, i ,id, thisObj);
 			});
 			selection.exit().remove();
-*/		
+			*/
 
+		},
+		draw_index_box: function(real_tree_index, cur_tree_index){
+			/*
+			* @function: drawIndex绘制barcode tree 前面的index rect以及index
+			* @parameter: null
+			*/
+			
+			var svg = self.d3el;
+			var indexRectBeginY = 0;//warning: rectY + barcoded_tree_biasy;
+
+			var originIndexX = 10;
+			var indexWidth = 20;
+
+			var indexTextX1 = originIndexX + indexWidth / 4; //+ indexWidth * 3 / 8;
+			var indexTextX2 = originIndexX + indexWidth / 16; //+ indexWidth * 3 / 16;
+			var indexTextOr = originIndexX + indexWidth / 8;
+			var indexTextY = indexRectBeginY + rectHeight * 5 / 8;
+			svg.select('#group-' + cur_tree_index).remove();
+
+				var indexGroup = svg.append('g')
+					.attr('id','group-' + cur_tree_index);
+
+				indexGroup.append('rect')
+					.attr('class', 'index-rect')
+					.attr('x',originIndexX)
+					.attr('y', indexRectBeginY)
+					.attr('width',indexWidth)
+					.attr('height',rectHeight)
+					.on('mouseover',function(d,i){
+						d3.select(this).classed('this-highlight',true);
+					})
+					.on('mouseout',function(d,i){
+						d3.select(this).classed('this-highlight',false);
+					});
+				var indexText = 0;
+				if(svg_id == setOperationSvgName){
+					switch(cur_tree_index){
+						case 0:
+							indexText = 'AND';	
+							indexGroup.append('text')
+								.attr('class', 'index-text')
+								.attr('x',originIndexX)
+								.attr('y',indexTextY)
+								.text(indexText)
+								.style('font-size','10px');
+						break;
+						case 1:
+							indexText = 'OR';
+							indexGroup.append('text')
+								.attr('class','index-text')
+								.attr('x',indexTextOr)
+								.attr('y',indexTextY)
+								.text(indexText)
+								.style('font-size','10px');
+						break;
+					}
+				}else if(svg_id == radialSvgName){
+					indexText = dataList[real_tree_index].id;
+					if(indexText < 10){
+						indexGroup.append('text')
+							.attr('class', 'index-text')
+							.attr('x',indexTextX1)
+							.attr('y',indexTextY)
+							.text(indexText)
+							.style('font-size','15px');
+					}else{
+						indexGroup.append('text')
+							.attr('class', 'index-text')
+							.attr('x',indexTextX2)
+							.attr('y',indexTextY)
+							.text(indexText)
+							.style('font-size','15px');
+					}
+				}
+			
+		},
+		idHandler: function(){
+			/*
+			* @function: idHandler 返回某一节点的id值
+			* @parameter: d, i, tree_index表示的是绘制的是哪一个barcode
+			*/
+			/*
+			function idHandler(d,i,tree_index,svg_id){
+				var treeIndex = tree_index;
+				var id = 'bar-id' + d.linear_index + "rect_background_index-" + treeIndex
+						+ '-' + svg_id;
+				//将continuous_repeat_time为2的节点存储下来，在存储的节点的基础上面append rect
+				var barId = 'bar-id' + d.linear_index;
+				if(d.continuous_repeat_time == 2){
+					if(repeat2Array.indexOf(barId) == -1){
+						repeat2Array.push(barId);
+					}
+				}
+				return id;
+			}
+			*/
 		}
-
 
 		/*
 		draw_grid: function(svg_id,biasx,biasy,width,height,repeattime)//repeattime决定网格的密度

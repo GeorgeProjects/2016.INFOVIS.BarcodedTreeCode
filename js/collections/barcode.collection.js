@@ -91,10 +91,10 @@ define([
 				if(repeatTime > 1 && curDepth <= initReduceLevel){
 					initReduceLevel = curDepth;
 				}else if(repeatTime == 1 && curDepth == initReduceLevel){
-					//每个节点只会控制它的字节点，所以遇到相同深度的节点，那么会恢复到原始的level
+					//每个节点只会控制它的子节点，所以遇到相同深度的节点，那么会恢复到原始的level
 					initReduceLevel = Variables.get('sumLevel');//warning：原来代码里是10
 				}else if(curDepth < initReduceLevel){
-					initReduceLevel = initReduceLevel;//warning：这一行的作用？
+					initReduceLevel = initReduceLevel;//方便理解
 				}
 				uniontreeReducedSizeXYposition[i].x = xCompute;
 				if(repeatTime == 1 && curDepth <= initReduceLevel){//此时不被压缩
@@ -121,6 +121,7 @@ define([
 					uniontreeReducedSizeXYposition[i].y = 0;
 				}
 				//warning：原来有uniontreeReducedSizeXYposition[i].y += rectY + barcoded_tree_biasy;
+				//warning：这个biasy以后还是得考虑的
 			}
 			//change_width(xCompute + margin_draw_svg.right);
 			return uniontreeReducedSizeXYposition;
