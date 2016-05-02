@@ -77,13 +77,15 @@ define([
  		 */
  		pre_collection_data: function(){
  			var self = this;
+ 			self.basicDataModel.cal_union_tree();
+
+ 			self.barcodeCollection.unionTree = self.basicDataModel.get('unionTree');//把basicmodel中的并集树交给barcodeCollection
+
  			var fileLinearDataArray = self.basicDataModel.get('fileLinearDataArray');
- 			var barcodeList = new Array();
  			for(var i = 0; i < fileLinearDataArray.length;i++){
  				var barcodeModel = new BarcodeModel({barcodeIndex: i, barcodeSingleDataArray: fileLinearDataArray[i]});
  				self.barcodeCollection.push(barcodeModel)
  			}
- 			console.log(self.barcodeCollection);
  			self.barcodeCollection.preprocess();
  		}
 	}))();

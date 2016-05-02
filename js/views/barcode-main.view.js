@@ -38,9 +38,11 @@ define([
 			style: 'width: 100%; height: 100%;',
 			id: 'barcode-main-div'
 		},
+		
 		regions:{
 			barcode1: "#selected-barcode-1"
 		},
+		
 		template: function(){
 			return _.template(Tpl)
 		},
@@ -49,46 +51,35 @@ define([
 		},
 		initialize: function(options){
 			var self = this;
+			self.d3el = d3.select(self.el);
+
 			var model = self.model;
 			var barcodeCollection = window.Datacenter.barcodeCollection;
-			var singleBarcodeLocation = new Array();
-			singleBarcodeLocation = barcodeCollection.get("barcodeLocation");
-			console.log(singleBarcodeLocation);
+
+			var singleOriginalUnreducedSizeXposition = new Array();
+			singleOriginalUnreducedSizeXposition = barcodeCollection.get("originalUnreducedSizeXposition");
+			console.log(singleOriginalUnreducedSizeXposition);
+
 		},
-		draw_barcode: function(){//利用collection中的信息画出barcode
+		render: function(){
+			var self = this;
 			var barcodeCollection = window.Datacenter.barcodeCollection;//所有的bar的model的collection
 			var selectBarArray = Variables.get('selectBarArray');//存储了需要画的barcode的标号
+			console.log(barcodeCollection)
+
+			self.draw_single_barcode();
+		},
+		draw_single_barcode: function(){//利用collection中的信息画出barcode
+			var self = this;
+			var svg = self.d3el;//此处不能直接用id选svg，因为此时这个svg实际上还没有画出来，只能用self来找
 
 			//var barcodeSingleView = new BarcodeSingle();//{barcodeSingleLocation:singleBarcodeLocation, index: 0}
 			//self.showChildView('barcode1', barcodeSingleView);
 
-			var self = this;
-			var svg = self.d3el;//此处不能直接用id选svg，因为此时这个svg实际上还没有画出来，只能用self来找
+			console.log(svg)
 			
-			/*
-			var radialTip = d3.tip()
-			  	.attr('class', 'd3-tip')
-			 	.offset([-10, 0])
-			  	.html(function(d) {
-			    	return 	"Name:<span style='color:red'>" + d.name +"</span>" +
-			    			"Value:<span style='color:red'>" +  "bytes" +"</span>" +
-			    			"Depth:<span style='color:red'>" + d._depth + "</span>" +
-			    		 	"Index:<span style='color:red'>" + d.linear_index + "</span>" +
-			    		 	"Same pattern number:<span style='color:red'>" + d.maximum_continuous_repeat_group_size + "</span>"
-			    		 	;
-			  	});
-			svg.call(radialTip);
-
-			var patternTip = d3.tip()
-		  	.attr('class', 'd3-tip')
-		 	.offset([-10, 0])
-		  	.html(function(d) {
-		    	return "Name:<span style='color:red'>" + "</span>" +
-		    		 "Description:<span style='color:red'>" + "</span>" +
-		    		 "Index:<span style='color:red'>" + "</span>";
-		  	});
-			svg.call(patternTip);
-			*/
-		}
+	
+		},
+		
 	});
 });

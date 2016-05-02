@@ -39,7 +39,7 @@ define([
 
 			var barcodeMainView =  new BarcodeMain({model: Datacenter.barcodeModel});
 			self.showChildView('barcodeMain',barcodeMainView);
-			barcodeMainView.draw_barcode();
+			barcodeMainView.render();
 			
 			var barcodePanelView = new BarcodePanel();
 			self.showChildView('barcodePanel',barcodePanelView);

@@ -230,7 +230,7 @@ define([
 				else
 				{
 					selectBarArray.push(d.time_index);
-					selectBarArray.sort();
+					//selectBarArray.sort();
 				}
 				Variables.set("selectBarArray",selectBarArray);
 				self.trigger("UpdateHighlight");//更新高亮

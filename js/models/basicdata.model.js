@@ -13,7 +13,8 @@ define([
 	return Backbone.Model.extend({
 		defaults: {
 			'fileCSVDataArray': [],
-			'fileLinearDataArray': []
+			'fileLinearDataArray': [],
+			'unionTree':[]
 		},
 		load_csv_data: function(def_array){
 			var self = this;
@@ -196,62 +197,7 @@ define([
 				return resultRoot;
 			}
 		},
-		//将operator_root合并到target_root上，并且要求这两个root都是已经实际建出来的树的结点，而不能为空
-		//只调整.trees_values[]和.children[]
-		merge_trees: function(operator_root,target_root)
-		{
-			var self = this;
-			if (operator_root.name != target_root.name)
-			{
-				console.log("merge_trees name error");
-				return;
-			}
-				
-			//1.合并.trees_values[]
-			if (_.has(operator_root,'trees_values'))
-			{
-				if ( ! _.has(target_root,'trees_values'))
-				{
-					target_root.trees_values=[];
-				}
-				for (var i = 0;i < operator_root.trees_values.length;++i)
-				{	
-					if ( ! _.has(operator_root.trees_values,i))//跳掉没有的
-					{
-						continue;
-					}
-					target_root.trees_values[i] = _.has(target_root.trees_values,i) ? target_root.trees_values[i] : 0;//原来有就累加上去
-					target_root.trees_values[i] += operator_root.trees_values[i];
-				}
-			}
-			//2.合并.children[]
-			if (_.has(operator_root,'children'))
-			{
-				if ( ! _.has(target_root,'children'))
-				{
-					target_root.trees_values = [];
-				}
-				for (var i = 0;i < operator_root.children.length;++i)
-				{
-					var curOperatorChild = operator_root.children[i];
-					var flagFind = 0;
-					for (var j = 0; j < target_root.children.length;++j)
-					{
-						var curTargetChild = target_root.children[j];
-						if (curTargetChild.name == curOperatorChild.name)
-						{
-							flagFind = 1;
-							self.merge_trees(curOperatorChild,curTargetChild);//递归
-						}
-					} 
-					if (flagFind == 0)
-					{
-						target_root.children[target_root.children.length] = self.deep_copy_tree(curOperatorChild,target_root);
-					}
-				}
-			}
-			return;
-		},
+		
 		//返回一棵树的深拷贝，并且强行认为source是根，赋其._father为undefined
 		//如果传入了father，会把source的._father取为father
 		deep_copy_tree: function(source,father)
@@ -565,7 +511,7 @@ define([
 		{
 			var resultLinearTree = [];
 			//traverse递归中要保持的static变量
-			var CUR_INDEX = 0;
+			var cur_index = 0;
 			//传入树根和用于存储线性化的树的数组
 			//traverse中按深度优先进行线性化以及标记每个结点的linear_index
 			function _traverse_linearlize(root,target_linear_tree)
@@ -573,8 +519,8 @@ define([
 				if (typeof(root) == 'undefined')
 					return;
 
-				root.linear_index = CUR_INDEX;//记录每个结点在数组中的index
-				target_linear_tree[CUR_INDEX] = root;
+				root.linear_index = cur_index;//记录每个结点在数组中的index
+				target_linear_tree[cur_index] = root;
 
 				if (typeof(root.children) == 'undefined')
 					return;
@@ -582,12 +528,97 @@ define([
 				var curRootChildrenNum = root.children.length;
 				for (var i = 0;i < curRootChildrenNum;++i)
 				{
-					CUR_INDEX = CUR_INDEX + 1;
+					cur_index = cur_index + 1;
 					_traverse_linearlize(root.children[i],target_linear_tree);
 				}
 			}
 			_traverse_linearlize(root,resultLinearTree);
 			return resultLinearTree;
+		},
+
+		//计算自身的fileLinearDataArray中所有的树合成的并集树，存到uniontree里面
+		cal_union_tree: function()
+		{
+			var self = this;
+			var fileCSVDataArray = self.get('fileCSVDataArray');
+			var unionRoot = [];
+			for(var i = 0;i < fileCSVDataArray.length;i++){
+				var curCsvDataArray = fileCSVDataArray[i];
+				self.process_csv(curCsvDataArray);
+				var filteredDataArray = self.filter(curCsvDataArray);//filteredDataArray是可以直接使用的datalist形式了
+				//建树，计算._depth, ._father, .children[], .description, .name, 为叶子节点给出.trees_values[]
+				var root = self.build_tree(filteredDataArray,i);
+				//self.aggregate_separate_tree_value(root);
+				if (i == 0){
+					unionRoot = self.deep_copy_tree(root);
+				}
+				else{
+					self.merge_trees(root,unionRoot);
+				}
+			}
+			self.aggregate_separate_tree_value(unionRoot);
+			self.reorder_tree(unionRoot);
+			self.cal_all_pattern_marking(unionRoot,true);
+			self.cal_routes(unionRoot);
+			var unionTreeArray = self.linearlize(unionRoot);
+			self.set('unionTree',unionTreeArray);
+		},
+
+		//将operator_root合并到target_root上，并且要求这两个root都是已经实际建出来的树的结点，而不能为空
+		//只调整.trees_values[]和.children[]
+		merge_trees: function(operator_root,target_root)
+		{
+			var self = this;
+			if (operator_root.name != target_root.name)
+			{
+				console.log("merge_trees name error");
+				return;
+			}
+				
+			//1.合并.trees_values[]
+			if (_.has(operator_root,'trees_values'))
+			{
+				if ( ! _.has(target_root,'trees_values'))
+				{
+					target_root.trees_values=[];
+				}
+				for (var i = 0;i < operator_root.trees_values.length;++i)
+				{	
+					if ( ! _.has(operator_root.trees_values,i))//跳掉没有的
+					{
+						continue;
+					}
+					target_root.trees_values[i] = _.has(target_root.trees_values,i) ? target_root.trees_values[i] : 0;//原来有就累加上去
+					target_root.trees_values[i] += operator_root.trees_values[i];
+				}
+			}
+			//2.合并.children[]
+			if (_.has(operator_root,'children'))
+			{
+				if ( ! _.has(target_root,'children'))
+				{
+					target_root.children = [];
+				}
+				for (var i = 0;i < operator_root.children.length;++i)
+				{
+					var curOperatorChild = operator_root.children[i];
+					var flagFind = 0;
+					for (var j = 0; j < target_root.children.length;++j)
+					{
+						var curTargetChild = target_root.children[j];
+						if (curTargetChild.name == curOperatorChild.name)
+						{
+							flagFind = 1;
+							self.merge_trees(curOperatorChild,curTargetChild);//递归
+						}
+					} 
+					if (flagFind == 0)
+					{
+						target_root.children[target_root.children.length] = self.deep_copy_tree(curOperatorChild,target_root);
+					}
+				}
+			}
+			return;
 		}
 	});
 });
