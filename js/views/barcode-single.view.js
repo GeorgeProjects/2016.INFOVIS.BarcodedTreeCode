@@ -176,7 +176,7 @@ define([
 			selection.exit().remove();
 */		
 
-		},
+		}
 
 
 		/*
