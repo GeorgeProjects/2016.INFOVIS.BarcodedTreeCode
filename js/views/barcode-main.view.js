@@ -62,7 +62,7 @@ define([
 
 		},
 		//注意：函数的名字不能随便起成render，这边如果把draw_barcode名字换成render，那么region中的#selected-barcode-1就不会渲染上来了
-		draw_barcode: function(){//利用collection中的信息画出barcode
+		draw_single_barcode: function(){//利用collection中的信息画出barcode
 			var self = this;
 			var svg = self.d3el;//此处不能直接用id选svg，因为此时这个svg实际上还没有画出来，只能用self来找
 
@@ -74,6 +74,7 @@ define([
 
 			var barcodeSingleView = new BarcodeSingle();//{barcodeSingleLocation:singleBarcodeLocation, index: 0}
 			self.showChildView('barcode1', barcodeSingleView);
+			barcodeSingleView.draw_barcode();
 
 			
 		},

@@ -38,9 +38,11 @@ define([
 			style: 'width: 100%; height: 100%;',
 			class: 'barcode-single-div'
 		},
+		/*
 		template: function(){
 			return _.template(Tpl)
 		},
+		*/
 		events:{
 
 		},
@@ -48,7 +50,7 @@ define([
 			var self = this;
 			var model = self.model;
 		},
-		draw_barcode: function(){
+		draw_single_barcode: function(){
 			var self = this;
 			var svg = self.d3el;//此处不能直接用id选svg，因为此时这个svg实际上还没有画出来，只能用self来找
 			svg.append("rect")
@@ -56,7 +58,7 @@ define([
 			.attr("y",0)
 			.attr("height",30)
 			.attr("width",30)
-			.attr("fill",red);
+			.attr("fill","red");
 
 
 			//linear_tree是unionLinearTree;
