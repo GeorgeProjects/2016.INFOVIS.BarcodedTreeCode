@@ -25,7 +25,7 @@ define([
             //barcode需要的变量
             //1. 需要根据数据格式手动调整的量
             'sumLevel' : 5,//手动设置的总层数
-            'barWidthOfLevel':[30,20,10,5,2],//标记各层的bar的宽度
+            'barWidthOfLevel':[10,8,6,4,2],//标记各层的bar的宽度
             //2. 可以通过按钮调整的量
             'compressBarcodeMode':false,//标记当前处在barcode的完全展开或者压缩状态
             'displayedLevel':[],//当前应该被展示的层级的集合
@@ -37,7 +37,7 @@ define([
             'maxHeight':100,//设置bar允许的最大高度
             'barHeight':20,//标记所有bar的高度
             //3. 与数据格式无关，但是也不会暴露出来的在代码中调整的样式参数
-            'barInterval':2,//相邻的bar之间的距离
+            'barInterval':1.5,//相邻的bar之间的距离
             'squarenumOfColumn':5,//reduce状态下一列里面有多少个方块
             
             //histogram需要的变量
