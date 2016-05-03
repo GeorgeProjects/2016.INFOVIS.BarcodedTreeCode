@@ -78,7 +78,6 @@ define([
                     stop: function(event,ui){
                         var deltaHeight = ui.size.height - ui.originalSize.height;
                         var histogramViewOriginalHeight = $( "#histogram-view" ).height();
-                        console.log(histogramViewOriginalHeight,deltaHeight)
                         $( "#histogram-view" ).height(histogramViewOriginalHeight - deltaHeight);
                     }
                 });

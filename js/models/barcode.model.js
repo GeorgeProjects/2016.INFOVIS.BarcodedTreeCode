@@ -25,11 +25,6 @@ define([
 			var self = this;
 			
 			
-			/*
-			var index = self.get('barcodeIndex');
-			// get the barcode location according the barcode information
-			self.set('barcodeSingleDataArray', fileLinearDataArray[index]);
-			*/
 		}
 	});
 })

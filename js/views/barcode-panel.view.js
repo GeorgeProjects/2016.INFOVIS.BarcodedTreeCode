@@ -102,7 +102,6 @@ define([
 						var barWidthOfLevel = Variables.get('barWidthOfLevel');
 						barWidthOfLevel[index] = ui.value;
 						Variables.set('barWidthOfLevel',barWidthOfLevel);
-						console.log(Variables);
 				    }
 				});
 		    });

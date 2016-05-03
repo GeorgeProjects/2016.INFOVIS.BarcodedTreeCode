@@ -44,6 +44,7 @@ define([
 
 			var histogramInfoView =  new HistogramInfo({model: Datacenter.histogramModel});
 			self.showChildView('histogramInfo',histogramInfoView);
+			
 			histogramInfoView.default_display();
 		},
 	});

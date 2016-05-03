@@ -84,7 +84,7 @@ define([
  			var fileLinearDataArray = self.basicDataModel.get('fileLinearDataArray');
  			for(var i = 0; i < fileLinearDataArray.length;i++){
  				var barcodeModel = new BarcodeModel({barcodeIndex: i, barcodeSingleDataArray: fileLinearDataArray[i]});
- 				self.barcodeCollection.push(barcodeModel)
+ 				self.barcodeCollection.push(barcodeModel);//barcodeCollection中可以接收barcodeModel类型的参数，并且collection就相当于是model的数组，因此可以将model添加到collection中
  			}
  			self.barcodeCollection.preprocess();
  		}
