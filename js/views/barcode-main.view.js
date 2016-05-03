@@ -40,14 +40,13 @@ define([
 		},
 		
 		regions:{
-			barcode1: "#selected-barcode-1"
+			barcode0: "#selected-barcode-1"
 		},
 		
 		template: function(){
 			return _.template(Tpl)
 		},
 		events:{
-
 		},
 		initialize: function(options){
 			var self = this;
@@ -55,11 +54,6 @@ define([
 
 			var model = self.model;
 			var barcodeCollection = window.Datacenter.barcodeCollection;
-
-			var singleOriginalUnreducedSizeXposition = new Array();
-			singleOriginalUnreducedSizeXposition = barcodeCollection.get("originalUnreducedSizeXposition");
-			console.log(singleOriginalUnreducedSizeXposition);
-
 		},
 		//注意：函数的名字不能随便起成render，这边如果把draw_barcode名字换成render，那么region中的#selected-barcode-1就不会渲染上来了
 		draw_barcode: function(){//利用collection中的信息画出barcode
@@ -69,15 +63,13 @@ define([
 			var barcodeCollection = window.Datacenter.barcodeCollection;//所有的bar的model的collection
 			var selectBarArray = Variables.get('selectBarArray');//存储了需要画的barcode的标号
 
-			var barcodeCollection = window.Datacenter.barcodeCollection;//所有的bar的model的collection
-			var selectBarArray = Variables.get('selectBarArray');//存储了需要画的barcode的标号
-
-			var barcodeSingleView = new BarcodeSingle();//{barcodeSingleLocation:singleBarcodeLocation, index: 0}
-			self.showChildView('barcode1', barcodeSingleView);
-			barcodeSingleView.draw_single_barcode();
-
-			
+			for(var i = 0;i < selectBarArray.length;i++){
+				var barcodeIndex = +selectBarArray[i];
+				var barcodeSingleModel = barcodeCollection.models[barcodeIndex];
+				var barcodeSingleView = new BarcodeSingle({model: barcodeSingleModel});
+				self.showChildView('barcode0', barcodeSingleView);
+				barcodeSingleView.draw_single_barcode();
+			}	
 		},
-
 	});
 });
