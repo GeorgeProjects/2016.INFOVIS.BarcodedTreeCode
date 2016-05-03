@@ -49,18 +49,26 @@ define([
 		initialize: function(options){
 			var self = this;
 			var model = self.model;
-
-			console.log(model)
 		},
 		draw_single_barcode: function(linear_tree, index, real_tree_index, originNodeArray){
 			var self = this;
 			var svg = self.d3el;//此处不能直接用id选svg，因为此时这个svg实际上还没有画出来，只能用self来找
-			svg.append("rect")
-			.attr("x",0)
-			.attr("y",0)
-			.attr("height",30)
-			.attr("width",30)
-			.attr("fill","red");
+			var barcodeSingleLocation = self.model.attributes.barLocationArray;
+			svg.selectAll('.barcode-rect')
+			.data(barcodeSingleLocation)
+			.enter()
+			.append('rect')
+			.attr('x',function(d,i){
+				return +d.x;
+			})
+			.attr('y',0)
+			.attr('height',function(d,i){
+				return +d.height;
+			})
+			.attr('width',function(d,i){
+				return +d.width;
+			})
+			.attr('fill','black');
 
 			//linear_tree是unionLinearTree;
 			//originNodeArray是get_origin_attr(index);	
