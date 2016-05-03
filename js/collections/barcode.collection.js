@@ -14,31 +14,33 @@ define([
 	return Backbone.Collection.extend({
 		model: BarcodeModel,
 		
-		originalUnreducedSizeXposition:[],//所有的树的unreduced状态下的方块的size和position的数组
 		uniontreeReducedSizeXYposition:[],//uniontree的reduced状态下的方块的size和position的数组
+		originalUnreducedSizeXposition:[],//所有的树的unreduced状态下的方块的size和position的数组
 		unionTree:[],//间接从basicdata.model获得的并集树的lineartree
-
 
 		initialize: function(){
 			var self = this;
 		},
+
 		preprocess: function(){//负责计算collection中每个model的barLocationArray[]
 			//已经有了每个collection中每个model的barcodeIndex,barcodeSingleDataArray[]，需要计算对应的barLocationArray[]
 			var self = this;
 
 			//1. 计算self.originalUnreducedSizeXposition[]
 			var modelsCollection = self.models;
+			var originalUnreducedSizeXposition = new Array();
 			for(var i = 0;i < modelsCollection.length;i++){
 				var linearTree = modelsCollection[i].attributes.barcodeSingleDataArray;
 				var singleUnreducedSizeXpositionArray = self.get_origin_unreduced_node_size_xposition_attr(linearTree);
-				self.originalUnreducedSizeXposition[i] = singleUnreducedSizeXpositionArray;
+				modelsCollection[i].attributes.barLocationArray = singleUnreducedSizeXpositionArray;
+				originalUnreducedSizeXposition.push(singleUnreducedSizeXpositionArray);
 			}
-			console.log(self.originalUnreducedSizeXposition);
+			self.originalUnreducedSizeXposition = originalUnreducedSizeXposition;
 
 			//2. 计算self.uniontreeReducedSizeXYposition
 			self.uniontreeReducedSizeXYposition = self.get_origin_reduced_node_size_xyposition_attr(self.unionTree);
-			console.log(self.uniontreeReducedSizeXYposition)
 		},
+
 		get_origin_unreduced_node_size_xposition_attr: function(linear_tree){//给定一个tree以后，计算其中每个结点初始渲染（即非压缩情况）的高度，宽度，横轴坐标		
 			var widthArray = Variables.get('barWidthOfLevel');//barWidthOfLevel[]是存储每一层的结点的宽度的全局变量
 			var rectAllHeight = Variables.get('barHeight'); //barHeight是记录所有bar的默认高度的全局变量
